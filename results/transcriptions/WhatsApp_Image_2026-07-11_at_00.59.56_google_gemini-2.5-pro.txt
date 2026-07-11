@@ -1,0 +1,24 @@
+Document réponse DOCREPB3
+unsigned int Regulation_FiO2(float fio2_mesure, float fio2_consigne){
+    if(........................){
+        duty_cycle++;
+    }
+    else if(........................){
+        duty_cycle--;
+    }
+    return duty_cycle;}
+
+Document réponse DOCREPB4
+void main(){
+    unsigned int val_fio2;
+    unsigned int val_debit;
+    unsigned int val_temp;
+
+    float fio2;
+    float debit;
+    float temperature;
+
+// Acquisition des mesures
+acquirir_mesures(unsigned* val_fio2, unsigned* val_debit, unsigned* val_temp);
+
+//
