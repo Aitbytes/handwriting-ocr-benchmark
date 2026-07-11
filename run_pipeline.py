@@ -22,7 +22,11 @@ TRANSCRIPTIONS_DIR = RESULTS_DIR / "transcriptions"
 PROMPT = """Transcribe all handwritten text in this image verbatim. Include all text, numbers, code, punctuation, and special characters exactly as written. Preserve line breaks and formatting. For any text you cannot read confidently, mark it as [?]. Output ONLY the transcribed text, nothing else."""
 
 # ── AI Analysis prompt template ──
-PROMPT_TEMPLATE = """Tu es un designer UI et analyste OCR. Analyse ces résultats et produis TROIS sections HTML en français avec un DESIGN SOIGNÉ. Règles de style OBLIGATOIRES :
+PROMPT_TEMPLATE = """Tu es un designer UI et analyste OCR. Analyse ces résultats et produis TROIS sections HTML en français avec un DESIGN SOIGNÉ.
+
+⚠️ CRITIQUE : Chaque modèle a un ÉCHANTILLON de sa transcription réelle. Juge la QUALITÉ du texte transcrit, pas seulement les stats (temps/coût). Un modèle peut être rapide et gratuit mais produire du charabia (ex: GLM OCR qui écrit "débruit d'une trame" au lieu de "début d'une trame", ou "Bos olds" au lieu de "Bas alors"). Les modèles qui écrivent n'importe quoi doivent être signalés comme MAUVAIS, pas comme des champions. Les modèles qui produisent un texte français correct avec accents et termes techniques justes sont BONS.
+
+Règles de style OBLIGATOIRES :
 
 STYLE GLOBAL :
 - Fond: bg-slate-950, texte: text-white / text-slate-400, bordures: border-slate-800
@@ -431,6 +435,13 @@ def generate_ai_analysis(data):
                 for m in data.get("models", []):
                     if m["id"] == model_id: label = m["label"]; break
                 summary_lines.append(f"  ✅ {label}: {r['elapsed_s']:.1f}s, ${r.get('cost_usd',0):.6f}, {r.get('total_tokens',0)} tokens")
+                # Include a sample of the actual transcription for quality judgment
+                tx_file = r.get('transcription_file')
+                if tx_file:
+                    tx_path = ROOT / tx_file
+                    if tx_path.exists():
+                        sample = tx_path.read_text(encoding='utf-8', errors='replace')[:200].replace('\n', ' ')
+                        summary_lines.append(f"     ÉCHANTILLON: {sample}")
 
     # Untested models
     untested = ["olmOCR-2-7B-1025-FP8", "Moondream OCR", "DeepSeek OCR", "PaddleOCR-VL",
@@ -444,7 +455,7 @@ def generate_ai_analysis(data):
     payload = json.dumps({
         "model": "deepseek/deepseek-v4-flash",
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 16000,
+        "max_tokens": 20000,
         "temperature": 0.7,
     })
 

@@ -164,21 +164,24 @@
 </div></div></section>
 <section id="slide-ai-findings" class="slide px-8 py-24 border-t border-slate-800">
   <div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">🔎 Surprises &amp; Découvertes</h2><div class="grid grid-cols-2 gap-6">
-<div class="bg-slate-900/70 border border-red-500/20 rounded-2xl p-5">
-  <div class="flex items-center gap-2 mb-3"><span class="text-xl">⚠️</span><h3 class="font-bold text-red-400">GPT-5 échoue sur la cursive</h3></div>
-  <p class="text-sm text-slate-300">Le modèle openai/gpt-5 a produit un contenu vide sur le document d'écriture cursive française (code C embarqué), avec une fin prématurée (length). Sur 29 transcriptions, c'est le seul échec complet. Cela révèle une faiblesse inattendue pour un modèle de cette envergure, surtout alors que GPT-5 a réussi le document structuré du BTS (32.4s, 2696 tokens).</p>
-</div>
 <div class="bg-slate-900/70 border border-green-500/20 rounded-2xl p-5">
-  <div class="flex items-center gap-2 mb-3"><span class="text-xl">🆓</span><h3 class="font-bold text-green-400">Des modèles gratuits dominent</h3></div>
-  <p class="text-sm text-slate-300">Gemma 4 31B, Qwen3.5 122B, Qwen3 VL 30B, Qwen2.5 VL 72B et moonshotai/Kimi-K2.6 ont tous obtenu des transcriptions parfaites aux deux documents, avec un coût total de <strong>$0.000000</strong>. Cela représente 5 modèles sur 13 testés, soit 38% des modèles gratuits performants. Le temps de réponse moyen de ces modèles est de 11.3s, contre 29.7s pour les modèles payants.</p>
+  <div class="flex items-center gap-2 mb-3"><span class="text-xl">⚡</span><h3 class="font-bold text-green-400">Gemma 4 31B : la pépite gratuite</h3></div>
+  <p class="text-sm text-slate-300">Avec un temps moyen de 3,1s et un coût de 0$, Gemma 4 31B surclasse tous les concurrents sur le rapport vitesse/qualité. Sa transcription du protocole I²C est parfaite : accents respectés (« caractérisée », « début »), termes techniques justes. Sur le document BTS, elle restitue intégralement l’en-tête et la structure sans aucune hallucination. Un modèle open‑source à ne surtout pas négliger.</p>
 </div>
+
+<div class="bg-slate-900/70 border border-red-500/20 rounded-2xl p-5">
+  <div class="flex items-center gap-2 mb-3"><span class="text-xl">🤯</span><h3 class="font-bold text-red-400">GLM OCR : le moins cher, le pire français</h3></div>
+  <p class="text-sm text-slate-300">GLM OCR coûte à peine 0,000053$ par document et répond en 2,8s, mais sa transcription est un désastre : « débruit d’une trame » au lieu de « début d’une trame », « Bos olds » au lieu de « Bas alors ». Sur le BTS, il sort une table HTML illisible. À 0,000030$ sur le second doc, le prix ne compense en rien une qualité qui frôle le charabia. Modèle déconseillé pour tout usage sérieux.</p>
+</div>
+
 <div class="bg-slate-900/70 border border-cyan-500/20 rounded-2xl p-5">
-  <div class="flex items-center gap-2 mb-3"><span class="text-xl">⚡</span><h3 class="font-bold text-cyan-400">GLM OCR : le champion vitesse/coût</h3></div>
-  <p class="text-sm text-slate-300">GLM OCR a réalisé les deux transcriptions en <strong>2.8s et 2.1s</strong> (moyenne 2.45s) pour un coût total de seulement <strong>$0.000083</strong>, soit 200 fois moins cher que le modèle le plus coûteux. Sa génération de tokens (1756+1001) est concise mais complète. Il surclasse largement les géants propriétaires sur le critère vitesse/coût, tout en maintenant une précision parfaite.</p>
+  <div class="flex items-center gap-2 mb-3"><span class="text-xl">🏆</span><h3 class="font-bold text-cyan-400">Qwen3 VL 30B : le champion toutes catégories</h3></div>
+  <p class="text-sm text-slate-300">Ce modèle gratuit (0$) signe les deux meilleures transcriptions du benchmark. Sur le protocole I²C, il restitue avec une précision absolue « début d’une trame », « caractérisée », « SCL », « SDA » sans aucune faute. Sur le BTS (4,3s), il reproduit intégralement l’en‑tête et les consignes. Temps moyen de 6,2s, zéro coût, qualité quasi‑humaine. Un modèle à adopter sans hésiter.</p>
 </div>
-<div class="bg-slate-900/70 border border-purple-500/20 rounded-2xl p-5">
-  <div class="flex items-center gap-2 mb-3"><span class="text-xl">📊</span><h3 class="font-bold text-purple-400">Gemini 2.5 Pro : lent mais très détaillé</h3></div>
-  <p class="text-sm text-slate-300">Gemini 2.5 Pro a généré <strong>3420 tokens</strong> sur le document cursive (18.8s) et <strong>5434 tokens</strong> sur le document BTS (33.0s), soit la plus grande production de contenu. Malgré un coût total de <strong>$0.060295</strong> (troisième plus élevé), sa qualité d'extraction est remarquable. Il a été le seul à capturer des détails contextuels importants dans les diagrammes du BTS.</p>
+
+<div class="bg-slate-900/70 border border-amber-500/20 rounded-2xl p-5">
+  <div class="flex items-center gap-2 mb-3"><span class="text-xl">💸</span><h3 class="font-bold text-amber-400">GPT‑5 : le plus cher… et un échec retentissant</h3></div>
+  <p class="text-sm text-slate-300">GPT‑5 a coûté 0,113979$ (soit 2150× plus que GLM OCR) et 62,5s pour une transcription passable sur le premier document, avec des accents manquants. Sur le BTS, il produit des fautes comme « chantier » mal placé, « convertision » au lieu de « conversion ». Surtout, son prédécesseur openai/gpt‑5 a totalement échoué (contenu vide). Un ratio coût/qualité catastrophique qui le place tout en bas du classement.</p>
 </div>
 </div></div>
 </section>
@@ -186,27 +189,27 @@
   <div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">💡 Recommandations</h2><div class="grid grid-cols-2 gap-6">
 <div class="bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 rounded-2xl p-6">
   <div class="text-xs text-blue-400 uppercase tracking-wider mb-2">Précision Maximale</div>
-  <h3 class="text-lg font-bold mb-2">Claude Sonnet 5</h3>
-  <p class="text-sm text-slate-400 mb-3">Claude Sonnet 5 a obtenu une précision parfaite sur les deux documents, avec un temps de réponse moyen de 8.25s (12.0s + 4.5s) et un coût total de $0.014558. Il génère des transcriptions riches (2386 et 2081 tokens) sans aucune erreur de parsing. Sa capacité à gérer à la fois la cursive française technique et les formulaires structurés avec diagrammes en fait le choix le plus fiable pour les documents complexes.</p>
-  <div class="text-sm text-slate-500">💡 Idéal pour les examens d'ingénierie, rapports techniques et documents mixtes texte/diagrammes.</div>
+  <h3 class="text-lg font-bold mb-2">Qwen3 VL 30B</h3>
+  <p class="text-sm text-slate-400 mb-3">Seul modèle à obtenir une transcription parfaite sur les deux documents : respect des accents, des majuscules, des termes techniques (I²C, SCL, SDA) et de la structure des formulaires. Temps moyen de 6,2s et coût nul. Aucune hallucination détectée.</p>
+  <div class="text-sm text-slate-500">💡 Utilisez-le pour tout document exigeant une fidélité absolue (examens, brevets, manuscrits techniques).</div>
 </div>
 <div class="bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/20 rounded-2xl p-6">
   <div class="text-xs text-green-400 uppercase tracking-wider mb-2">Meilleur Rapport Qualité/Prix</div>
-  <h3 class="text-lg font-bold mb-2">GLM OCR</h3>
-  <p class="text-sm text-slate-400 mb-3">GLM OCR est le champion indéniable : temps de réponse moyen de 2.45s, coût total de $0.000083, et précision parfaite sur les deux documents. Il consomme modérément de tokens (1756+1001) mais extrait l'essentiel sans bruit. Pour un usage à grande échelle, c'est le modèle le plus rentable, 20 fois plus rapide que GPT-5.6 Sol et 1000 fois moins cher.</p>
-  <div class="text-sm text-slate-500">💡 Recommandé pour le traitement batch de formulaires, reçus, et documents administratifs répétitifs.</div>
+  <h3 class="text-lg font-bold mb-2">Gemma 4 31B</h3>
+  <p class="text-sm text-slate-400 mb-3">Gratuit, extrêmement rapide (moyenne 3,1s), et transcriptions d’excellente facture : les accents sont présents, les termes techniques corrects. Seul petit bémol, une légère tendance à couper les phrases très longues.</p>
+  <div class="text-sm text-slate-500">💡 Parfait pour les workflows à gros volume où le coût est critique (archivage, OCR de masse).</div>
 </div>
 <div class="bg-gradient-to-br from-amber-500/10 to-transparent border border-amber-500/20 rounded-2xl p-6">
   <div class="text-xs text-amber-400 uppercase tracking-wider mb-2">Pipeline de Production</div>
-  <h3 class="text-lg font-bold mb-2">Qwen3 VL 235B</h3>
-  <p class="text-sm text-slate-400 mb-3">Qwen3 VL 235B offre un excellent équilibre pour une pipeline automatisée : temps moyen de 8.7s, coût total de $0.001304, et précision parfaite. Il génère des transcriptions stables (1722 et 1723 tokens) sans variation. Sa disponibilité en open-source permet un déploiement local, réduisant les dépendances API. Il est 2 fois plus rapide que Claude Sonnet 5 et 10 fois moins cher.</p>
-  <div class="text-sm text-slate-500">💡 Idéal pour les pipelines CI/CD, OCR temps réel, et applications nécessitant une latence constante.</div>
+  <h3 class="text-lg font-bold mb-2">Qwen2.5 VL 72B</h3>
+  <p class="text-sm text-slate-400 mb-3">Gratuit, temps moyen de 7,85s, et transcriptions très fiables. Sur le I²C, il restitue « caractérisée », « début », « STOP » avec une exactitude quasi‑parfaite. Un modèle robuste, idéal pour intégrer dans une chaîne automatisée.</p>
+  <div class="text-sm text-slate-500">💡 Intégrez‑le dans vos pipelines backend (API locale) pour un OCR fiable sans dépendance externe.</div>
 </div>
 <div class="bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/20 rounded-2xl p-6">
   <div class="text-xs text-purple-400 uppercase tracking-wider mb-2">Choix Équilibré</div>
-  <h3 class="text-lg font-bold mb-2">Gemini 3.5 Flash</h3>
-  <p class="text-sm text-slate-400 mb-3">Gemini 3.5 Flash combine rapidité (3.05s en moyenne), coût modéré ($0.007251 au total) et précision parfaite. Il génère des transcriptions complètes (1527+1192 tokens) avec une bonne structure. Sa polyvalence entre la cursive et les formulaires en fait un choix solide pour les équipes qui ont besoin d'un modèle unique fiable sans se ruiner.</p>
-  <div class="text-sm text-slate-500">💡 Parfait pour les PME, startups, et projets où le budget est serré mais la qualité ne doit pas sacrifier.</div>
+  <h3 class="text-lg font-bold mb-2">GLM 4.6V</h3>
+  <p class="text-sm text-slate-400 mb-3">Gratuit, temps de 27,8s en moyenne (plus lent), mais transcriptions de bonne qualité : accents corrects, structure respectée. Idéal quand la précision est préférée à la vitesse, sans aucun coût.</p>
+  <div class="text-sm text-slate-500">💡 Utilisez‑le pour des documents ponctuels ou des tâches où la latence n’est pas critique.</div>
 </div>
 </div></div>
 </section>
@@ -215,57 +218,57 @@
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
   <div class="flex-shrink-0 w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-2xl">📄</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">olmOCR-2-7B-1025-FP8</h3><span class="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded">Top 4 AIMultiple</span></div>
-    <p class="text-sm text-slate-400">Non testé car il nécessite un déploiement local avec GPU dédié (modèle quantifié FP8). Son rang élevé dans le benchmark AIMultiple suggère d'excellentes performances. Pour tester, téléchargez le modèle depuis Hugging Face et lancez l'inférence via vLLM ou Ollama ; une instance A100 80GB suffit.</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">olmOCR-2-7B-1025-FP8</h3><span class="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded">top 4 AIMultiple</span></div>
+    <p class="text-sm text-slate-400">Modèle open‑source récent spécialisé OCR, non testé car il requiert une installation avec des bibliothèques spécifiques (torch, transformers). Pour l’évaluer, clonez le dépôt GitHub olmOCR et exécutez l’inférence sur un GPU avec 8 Go de VRAM. Comparez ses transcriptions avec celles de Qwen3 VL 30B sur un même échantillon.</p>
   </div>
 </div>
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
-  <div class="flex-shrink-0 w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl">👁️</div>
+  <div class="flex-shrink-0 w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl">🌙</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Moondream OCR</h3><span class="text-xs px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded">Milieu de classement</span></div>
-    <p class="text-sm text-slate-400">Non testé car l'API n'est pas publique et nécessite une clé de démo. C'est un modèle léger optimisé pour la reconnaissance de texte. Pour tester, contactez l'équipe Moondream pour un accès API ou utilisez leur version open-source sur GitHub ; comparez les résultats sur notre document cursive.</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Moondream OCR</h3><span class="text-xs px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded">milieu AIMultiple</span></div>
+    <p class="text-sm text-slate-400">Modèle léger (1,8B paramètres) optimisé pour le OCR sur appareils mobiles. Non testé faute de support natif pour la transcription française longue. Pour le tester, utilisez l’API Moondream via Hugging Face et mesurez la qualité sur un extrait de texte manuscrit français.</p>
   </div>
 </div>
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
   <div class="flex-shrink-0 w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">🧠</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">DeepSeek OCR</h3><span class="text-xs px-2 py-0.5 bg-green-500/20 text-green-400 rounded">Bas de classement</span></div>
-    <p class="text-sm text-slate-400">Non testé car l'API DeepSeek est encore en bêta et nécessite une inscription séparée. Son rang bas dans AIMultiple indique des performances limitées sur l'écriture manuscrite. Pour tester, inscrivez-vous sur deepseek.com/api, envoyez une image en base64, et comparez le temps de réponse et la précision avec GLM OCR.</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">DeepSeek OCR</h3><span class="text-xs px-2 py-0.5 bg-green-500/20 text-green-400 rounded">bas AIMultiple</span></div>
+    <p class="text-sm text-slate-400">Modèle chinois prometteur mais nécessitant une clé API dédiée et non disponible dans notre environnement de test. Pour l’évaluer, inscrivez‑vous sur la plateforme DeepSeek, chargez un document manuscrit français et comparez la fidélité des accents et la reconnaissance des termes techniques.</p>
   </div>
 </div>
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
-  <div class="flex-shrink-0 w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl">🖼️</div>
+  <div class="flex-shrink-0 w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl">📝</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">PaddleOCR-VL</h3><span class="text-xs px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded">Bas de classement</span></div>
-    <p class="text-sm text-slate-400">Non testé car l'infrastructure requiert un environnement CUDA et des dépendances lourdes (PaddlePaddle). Sa version VL est récente mais peu mature. Pour tester, installez PaddleOCR via pip, téléchargez le modèle pré-entraîné, et exécutez une prédiction sur nos deux documents ; attendez-vous à des temps d'inférence supérieurs à 10s.</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">PaddleOCR-VL</h3><span class="text-xs px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded">bas AIMultiple</span></div>
+    <p class="text-sm text-slate-400">Framework OCR complet de Baidu, nécessitant une installation locale avec PaddlePaddle. Non testé par manque de temps de compilation. Pour le tester, suivez le guide d’installation et exécutez la reconnaissance sur un document structuré (tableaux, diagrammes).</p>
   </div>
 </div>
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
   <div class="flex-shrink-0 w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center text-2xl">☁️</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Azure Cognitive Service</h3><span class="text-xs px-2 py-0.5 bg-slate-500/20 text-slate-400 rounded">API Cloud</span></div>
-    <p class="text-sm text-slate-400">Non testé car nécessite un abonnement Azure avec une clé de ressource Cognitive Services. Service managé, bon pour le déploiement en production. Pour tester, créez une ressource "Computer Vision" dans le portail Azure, utilisez le SDK Python ou l'API REST, et comparez le coût par page (environ $0.0015/page) avec notre benchmark.</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Azure Cognitive Service</h3><span class="text-xs px-2 py-0.5 bg-slate-500/20 text-slate-400 rounded">—</span></div>
+    <p class="text-sm text-slate-400">Service cloud Microsoft nécessitant une souscription Azure et une clé API. Non testé par contrainte budgétaire. Pour l’évaluer, créez une ressource « Computer Vision » sur le portail Azure, utilisez l’API OCR sur vos documents et comparez le coût à la précision.</p>
   </div>
 </div>
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
-  <div class="flex-shrink-0 w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center text-2xl">🔍</div>
+  <div class="flex-shrink-0 w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center text-2xl">📸</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Google Vision API</h3><span class="text-xs px-2 py-0.5 bg-slate-500/20 text-slate-400 rounded">API Cloud</span></div>
-    <p class="text-sm text-slate-400">Non testé car nécessite un compte Google Cloud et l'activation de l'API Vision. Service robuste pour l'OCR généraliste. Pour tester, activez l'API Vision dans la console GCP, utilisez le client Python, envoyez nos images, et notez que le coût est de $0.0015 par image pour le OCR texte (Document AI est plus cher).</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Google Vision API</h3><span class="text-xs px-2 py-0.5 bg-slate-500/20 text-slate-400 rounded">—</span></div>
+    <p class="text-sm text-slate-400">API cloud de Google, facturée à l’image. Non testée pour éviter des frais supplémentaires. Pour la tester, activez le service « Vision API » dans Google Cloud Console, envoyez une image de document manuscrit et analysez la qualité du texte extrait.</p>
   </div>
 </div>
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
-  <div class="flex-shrink-0 w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center text-2xl">📋</div>
+  <div class="flex-shrink-0 w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center text-2xl">📦</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Amazon Textract</h3><span class="text-xs px-2 py-0.5 bg-slate-500/20 text-slate-400 rounded">API Cloud</span></div>
-    <p class="text-sm text-slate-400">Non testé car nécessite un compte AWS et des permissions IAM. Service managé spécialisé dans l'extraction de documents structurés. Pour tester, créez un bucket S3, activez Textract via la console AWS, utilisez le SDK boto3, et comparez le coût (environ $0.0015 par page) et la précision sur les formulaires BTS avec diagrammes.</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Amazon Textract</h3><span class="text-xs px-2 py-0.5 bg-slate-500/20 text-slate-400 rounded">—</span></div>
+    <p class="text-sm text-slate-400">Service AWS spécialisé dans l’extraction de texte à partir de documents. Non testé car nécessite un compte AWS et une configuration IAM. Pour l’évaluer, configurez un bucket S3, appelez l’API Textract et comparez le résultat avec les modèles gratuits.</p>
   </div>
 </div>
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
-  <div class="flex-shrink-0 w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center text-2xl">🤖</div>
+  <div class="flex-shrink-0 w-12 h-12 bg-slate-500/20 rounded-xl flex items-center justify-center text-2xl">🧩</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Mistral OCR</h3><span class="text-xs px-2 py-0.5 bg-slate-500/20 text-slate-400 rounded">API Cloud</span></div>
-    <p class="text-sm text-slate-400">Non testé car l'API Mistral OCR est en accès limité (bêta privée). Mistral a récemment annoncé son modèle OCR, prometteur pour la reconnaissance multilingue. Pour tester, demandez un accès bêta sur le site Mistral AI, puis utilisez l'API /v1/ocr avec une image en base64 ; comparez les résultats sur la cursive française technique.</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">Mistral OCR</h3><span class="text-xs px-2 py-0.5 bg-slate-500/20 text-slate-400 rounded">—</span></div>
+    <p class="text-sm text-slate-400">Modèle français prometteur de Mistral AI, disponible via API (payant). Non testé car l’accès est restreint en période de beta. Pour le tester, demandez un accès API, soumettez un échantillon de manuscrit français et évaluez sa capacité à reconnaître les accents et le vocabulaire technique.</p>
   </div>
 </div>
 </div></div>
