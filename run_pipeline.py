@@ -22,44 +22,49 @@ TRANSCRIPTIONS_DIR = RESULTS_DIR / "transcriptions"
 PROMPT = """Transcribe all handwritten text in this image verbatim. Include all text, numbers, code, punctuation, and special characters exactly as written. Preserve line breaks and formatting. For any text you cannot read confidently, mark it as [?]. Output ONLY the transcribed text, nothing else."""
 
 # ── AI Analysis prompt template ──
-PROMPT_TEMPLATE = """Tu es un analyste expert en OCR et IA. Analyse ces résultats de benchmark d'écriture manuscrite et produis TROIS sections HTML détaillées en français. Chaque carte doit faire 3-5 phrases riches en données, pas juste un titre.
+PROMPT_TEMPLATE = """Tu es un designer UI et analyste OCR. Analyse ces résultats et produis TROIS sections HTML en français avec un DESIGN SOIGNÉ. Règles de style OBLIGATOIRES :
 
-## Section 1 : Surprises & Découvertes (id="slide-ai-findings")
-4 cartes (grid-cols-2). Chaque carte doit citer des chiffres précis et expliquer POURQUOI c'est surprenant.
+STYLE GLOBAL :
+- Fond: bg-slate-950, texte: text-white / text-slate-400, bordures: border-slate-800
+- Titres: text-4xl font-bold, sous-titres: text-lg font-bold, corps: text-sm text-slate-300/400
+- Cartes: bg-slate-900/70, border border-slate-800, rounded-2xl, p-5 (ou p-6 pour les grandes)
+- Icônes: TOUJOURS dans un conteneur flex-shrink-0 w-12 h-12 bg-{{color}}-500/20 rounded-xl flex items-center justify-center text-2xl
+- Labels: text-xs px-2 py-0.5 bg-{{color}}-500/20 text-{{color}}-400 rounded
+- Accents: green (positif), red (négatif/échec), amber/orange (avertissement), blue (précision), purple (coût), cyan (technique)
 
-EXEMPLE de carte bien rédigée :
-<div class="bg-slate-900/70 border border-red-500/20 rounded-2xl p-5">
-  <div class="flex items-center gap-2 mb-2"><span class="text-xl">\u274c</span><h3 class="font-bold text-red-400">GPT-5 Bloqué par le Filtre de Contenu</h3></div>
-  <p class="text-sm text-slate-300">GPT-5 a totalement refusé de transcrire le document I2C — réponse vide. Le modèle a probablement interprété le code C et les schémas techniques comme du contenu sensible, déclenchant le filtre de sécurité d'OpenAI. C'est un échec critique pour un usage académique ou ingénierie.</p>
+SECTION 1 — Surprises & Découvertes (id="slide-ai-findings") :
+4 cartes en grid-cols-2 gap-6. CHAQUE carte DOIT avoir cette structure EXACTE :
+<div class="bg-slate-900/70 border border-{{color}}-500/20 rounded-2xl p-5">
+  <div class="flex items-center gap-2 mb-3"><span class="text-xl">{{emoji}}</span><h3 class="font-bold text-{{color}}-400">{{titre}}</h3></div>
+  <p class="text-sm text-slate-300">{{3-5 phrases avec des chiffres précis du benchmark}}</p>
 </div>
 
-## Section 2 : Recommandations (id="slide-ai-recommendations")
-4 cartes (grid-cols-2) couvrant : précision maximale, meilleur rapport qualité/prix, pipeline de production, choix équilibré. Nommer les modèles, leurs métriques et le scénario d'usage.
-
-EXEMPLE de carte bien rédigée :
-<div class="bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/20 rounded-2xl p-5">
-  <div class="text-xs text-green-400 uppercase tracking-wider mb-2">Meilleur Rapport Qualité/Prix</div>
-  <h3 class="text-lg font-bold mb-2">Qwen3.5 122B + Gemma 4 31B</h3>
-  <p class="text-sm text-slate-400">Ces deux modèles sont GRATUITS via HuggingFace Router. Qwen3.5 122B excelle sur les documents structurés (9,5/10 sur le formulaire BTS), tandis que Gemma 4 31B est le plus rapide (3,1s en moyenne). Pour 0$, vous couvrez 90% des cas d'usage.</p>
+SECTION 2 — Recommandations (id="slide-ai-recommendations") :
+4 cartes en grid-cols-2 gap-6. CHAQUE carte DOIT avoir cette structure EXACTE :
+<div class="bg-gradient-to-br from-{{color}}-500/10 to-transparent border border-{{color}}-500/20 rounded-2xl p-6">
+  <div class="text-xs text-{{color}}-400 uppercase tracking-wider mb-2">{{catégorie}}</div>
+  <h3 class="text-lg font-bold mb-2">{{modèle(s)}}</h3>
+  <p class="text-sm text-slate-400 mb-3">{{explication 3-5 phrases}}</p>
+  <div class="text-sm text-slate-500">{{conseil pratique}}</div>
 </div>
+Les 4 catégories : Précision Maximale (blue), Meilleur Rapport Qualité/Prix (green), Pipeline de Production (amber), Choix Équilibré (purple)
 
-## Section 3 : Modèles Non Testés (id="slide-ai-untested")
-Liste TOUS les modèles du benchmark AIMultiple non testés, avec pour chacun : pourquoi pas testé, comment le tester concrètement.
-
-EXEMPLE d'élément bien rédigé :
+SECTION 3 — Modèles Non Testés (id="slide-ai-untested") :
+Liste dans space-y-4. CHAQUE élément DOIT avoir cette structure EXACTE :
 <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
-  <div class="flex-shrink-0 w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-2xl">\U0001f52c</div>
+  <div class="flex-shrink-0 w-12 h-12 bg-{{color}}-500/20 rounded-xl flex items-center justify-center text-2xl">{{emoji}}</div>
   <div class="flex-1">
-    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">olmOCR-2-7B-1025-FP8</h3><span class="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded">Top 4 du benchmark AIMultiple</span></div>
-    <p class="text-sm text-slate-400">Modèle OCR spécialisé d'Allen AI. Non disponible via API serverless — nécessite un HF Inference Endpoint (environ 1-3$/h de GPU) ou une installation locale avec conda + Python 3.11 + vLLM. Alternative : utiliser le playground gratuit sur olmocr.allenai.org.</p>
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">{{nom}}</h3><span class="text-xs px-2 py-0.5 bg-{{color}}-500/20 text-{{color}}-400 rounded">{{rang dans AIMultiple}}</span></div>
+    <p class="text-sm text-slate-400">{{raison non testé + comment tester concrètement}}</p>
   </div>
 </div>
+Modèles à lister : olmOCR-2-7B-1025-FP8 (amber, top 4), Moondream OCR (blue, milieu), DeepSeek OCR (green, bas), PaddleOCR-VL (purple, bas), Azure Cognitive Service (slate), Google Vision API (slate), Amazon Textract (slate), Mistral OCR (slate)
 
-FORMAT IMPÉRATIF — chaque section doit suivre EXACTEMENT ce squelette :
+FORMAT DE SORTIE — exactement 3 blocs, rien avant, rien après :
 
-<div id="slide-ai-findings" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">Surprises et Découvertes</h2><div class="grid grid-cols-2 gap-6">...4 CARTES DÉTAILLÉES...</div></div></div>
-<div id="slide-ai-recommendations" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">Recommandations</h2><div class="grid grid-cols-2 gap-6">...4 CARTES DÉTAILLÉES...</div></div></div>
-<div id="slide-ai-untested" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-3">Modèles Non Testés</h2><p class="text-slate-400 mb-8">Ces modèles du benchmark AIMultiple nécessitent des APIs ou infrastructures dédiées</p><div class="space-y-4">...UN ÉLÉMENT PAR MODÈLE...</div></div></div>
+<div id="slide-ai-findings" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">🔎 Surprises &amp; Découvertes</h2><div class="grid grid-cols-2 gap-6">...4 CARTES...</div></div></div>
+<div id="slide-ai-recommendations" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">💡 Recommandations</h2><div class="grid grid-cols-2 gap-6">...4 CARTES...</div></div></div>
+<div id="slide-ai-untested" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-3">🔬 Modèles Non Testés</h2><p class="text-slate-400 mb-8">Ces modèles du benchmark AIMultiple nécessitent des APIs ou infrastructures dédiées</p><div class="space-y-4">...8 ÉLÉMENTS...</div></div></div>
 
 RÉSULTATS DU BENCHMARK :
 {summary}"""
@@ -439,7 +444,7 @@ def generate_ai_analysis(data):
     payload = json.dumps({
         "model": "deepseek/deepseek-v4-flash",
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 12000,
+        "max_tokens": 16000,
         "temperature": 0.7,
     })
 
