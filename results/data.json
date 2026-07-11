@@ -23,6 +23,13 @@
       ],
       "fingerprint": "0abfda2ba226d9f395a740928155a7723ba089cd300e8aebbba3333d250071eb",
       "added_at": "2026-07-11T01:00:00"
+    },
+    "WhatsApp_Image_2026-07-11_at_00.59.56": {
+      "title": "WhatsApp Image 2026-07-11 at 00.59.56",
+      "description": "",
+      "tags": [],
+      "fingerprint": "2ab9e27922acae3928ba510836107591624ef2d25aea4a4b92b8e1221b6421c4",
+      "added_at": "2026-07-11T12:43:01.416258"
     }
   },
   "models": [
@@ -386,12 +393,50 @@
         "completion_tokens": 4000,
         "transcription_file": null
       }
+    },
+    "WhatsApp_Image_2026-07-11_at_00.59.56": {
+      "openai/gpt-5.6-sol": {
+        "success": false,
+        "error": "OPENROUTER_API_KEY not set"
+      },
+      "google/gemini-2.5-pro": {
+        "success": false,
+        "error": "OPENROUTER_API_KEY not set"
+      },
+      "anthropic/claude-sonnet-4.5": {
+        "success": false,
+        "error": "OPENROUTER_API_KEY not set"
+      },
+      "google/gemini-3.5-flash": {
+        "success": false,
+        "error": "OPENROUTER_API_KEY not set"
+      },
+      "anthropic/claude-sonnet-5": {
+        "success": false,
+        "error": "OPENROUTER_API_KEY not set"
+      },
+      "qwen/qwen3-vl-235b-a22b-instruct": {
+        "success": false,
+        "error": "OPENROUTER_API_KEY not set"
+      },
+      "Qwen/Qwen3.5-122B-A10B": {
+        "success": false,
+        "error": "HF_TOKEN not set"
+      },
+      "google/gemma-4-31B-it": {
+        "success": false,
+        "error": "HF_TOKEN not set"
+      },
+      "Qwen/Qwen3-VL-30B-A3B-Instruct": {
+        "success": false,
+        "error": "HF_TOKEN not set"
+      }
     }
   },
   "meta": {
-    "last_run": "2026-07-11T13:48:59.180526",
-    "total_documents": 2,
-    "total_models": 13,
+    "last_run": "2026-07-11T12:43:01.416295",
+    "total_documents": 3,
+    "total_models": 9,
     "total_runs": 29,
     "total_cost_usd": 0.3303
   },
