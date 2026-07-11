@@ -1,0 +1,106 @@
+{
+  "WhatsApp Image 2026-07-11 at 00.49.29": {
+    "openai/gpt-5": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "google/gemini-2.5-pro": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "anthropic/claude-sonnet-4.5": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "google/gemini-3.1-pro-preview": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "openai/gpt-5.6-sol": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "google/gemini-3.5-flash": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "anthropic/claude-sonnet-5": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "qwen/qwen3-vl-235b-a22b-instruct": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "zai/glm-ocr": {
+      "success": true,
+      "elapsed_s": 3.07,
+      "cost_usd": 5.3e-05,
+      "model_used": "glm-ocr",
+      "prompt_tokens": 1213,
+      "completion_tokens": 544,
+      "total_tokens": 1757,
+      "note": "ZAI API / GLM-OCR"
+    }
+  },
+  "WhatsApp Image 2026-07-11 at 00.57.39": {
+    "openai/gpt-5": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "google/gemini-2.5-pro": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "anthropic/claude-sonnet-4.5": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "google/gemini-3.1-pro-preview": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "openai/gpt-5.6-sol": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "google/gemini-3.5-flash": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "anthropic/claude-sonnet-5": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "qwen/qwen3-vl-235b-a22b-instruct": {
+      "success": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "elapsed_s": 0.04
+    },
+    "zai/glm-ocr": {
+      "success": true,
+      "elapsed_s": 2.15,
+      "cost_usd": 3e-05,
+      "model_used": "glm-ocr",
+      "prompt_tokens": 731,
+      "completion_tokens": 270,
+      "total_tokens": 1001,
+      "note": "ZAI API / GLM-OCR"
+    }
+  }
+}

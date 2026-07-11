@@ -1,0 +1,114 @@
+{
+  "WhatsApp Image 2026-07-11 at 00.49.29": {
+    "Qwen/Qwen2.5-VL-72B-Instruct": {
+      "success": true,
+      "elapsed_s": 13.1,
+      "model_used": "Qwen/Qwen2.5-VL-72B-Instruct",
+      "prompt_tokens": 1626,
+      "completion_tokens": 392,
+      "total_tokens": 2018,
+      "provider": "HF Router"
+    },
+    "Qwen/Qwen3-VL-30B-A3B-Instruct": {
+      "success": true,
+      "elapsed_s": 8.14,
+      "model_used": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+      "prompt_tokens": 1251,
+      "completion_tokens": 445,
+      "total_tokens": 1696,
+      "provider": "HF Router"
+    },
+    "google/gemma-4-31B-it": {
+      "success": true,
+      "elapsed_s": 5.09,
+      "model_used": "google/gemma-4-31B-it",
+      "prompt_tokens": 320,
+      "completion_tokens": 427,
+      "total_tokens": 747,
+      "provider": "HF Router"
+    },
+    "zai-org/GLM-4.6V": {
+      "success": true,
+      "elapsed_s": 35.4,
+      "model_used": "zai-org/GLM-4.6V",
+      "prompt_tokens": 1613,
+      "completion_tokens": 1703,
+      "total_tokens": 3316,
+      "provider": "HF Router"
+    },
+    "Qwen/Qwen3.5-122B-A10B": {
+      "success": true,
+      "elapsed_s": 5.59,
+      "model_used": "Qwen/Qwen3.5-122B-A10B",
+      "prompt_tokens": 1255,
+      "completion_tokens": 389,
+      "total_tokens": 1644,
+      "provider": "HF Router"
+    },
+    "moonshotai/Kimi-K2.6": {
+      "success": true,
+      "elapsed_s": 26.91,
+      "model_used": "moonshotai/Kimi-K2.6",
+      "prompt_tokens": 1664,
+      "completion_tokens": 4000,
+      "total_tokens": 5664,
+      "provider": "HF Router"
+    }
+  },
+  "WhatsApp Image 2026-07-11 at 00.57.39": {
+    "Qwen/Qwen2.5-VL-72B-Instruct": {
+      "success": true,
+      "elapsed_s": 2.65,
+      "model_used": "Qwen/Qwen2.5-VL-72B-Instruct",
+      "prompt_tokens": 1886,
+      "completion_tokens": 28,
+      "total_tokens": 1914,
+      "provider": "HF Router"
+    },
+    "Qwen/Qwen3-VL-30B-A3B-Instruct": {
+      "success": true,
+      "elapsed_s": 4.31,
+      "model_used": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+      "prompt_tokens": 1451,
+      "completion_tokens": 254,
+      "total_tokens": 1705,
+      "provider": "HF Router"
+    },
+    "google/gemma-4-31B-it": {
+      "success": true,
+      "elapsed_s": 1.07,
+      "model_used": "google/gemma-4-31B-it",
+      "prompt_tokens": 318,
+      "completion_tokens": 155,
+      "total_tokens": 473,
+      "provider": "HF Router"
+    },
+    "zai-org/GLM-4.6V": {
+      "success": true,
+      "elapsed_s": 20.18,
+      "model_used": "zai-org/GLM-4.6V",
+      "prompt_tokens": 1873,
+      "completion_tokens": 1684,
+      "total_tokens": 3557,
+      "provider": "HF Router"
+    },
+    "Qwen/Qwen3.5-122B-A10B": {
+      "success": true,
+      "elapsed_s": 3.19,
+      "model_used": "Qwen/Qwen3.5-122B-A10B",
+      "prompt_tokens": 1455,
+      "completion_tokens": 229,
+      "total_tokens": 1684,
+      "provider": "HF Router"
+    },
+    "moonshotai/Kimi-K2.6": {
+      "success": true,
+      "elapsed_s": 36.18,
+      "model_used": "moonshotai/Kimi-K2.6",
+      "prompt_tokens": 1968,
+      "completion_tokens": 4000,
+      "total_tokens": 5968,
+      "provider": "HF Router"
+    }
+  }
+}
