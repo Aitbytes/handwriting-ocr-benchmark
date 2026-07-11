@@ -278,7 +278,7 @@ def build_sidebar(data, docs_list):
 </div>'''
 
 
-def build_index_html(data, per_doc, aggregated):
+def build_index_html(data, per_doc, aggregated, ai_analysis=None):
     """Build the complete index.html with all slides."""
     docs_list = list(data.get("documents", {}).items())
     meta = data.get("meta", {})
@@ -292,6 +292,30 @@ def build_index_html(data, per_doc, aggregated):
     sidebar = build_sidebar(data, docs_list)
     speed_slide = build_speed_cost_slide(aggregated)
     rankings_slide = build_final_rankings_slide(aggregated)
+
+    # AI-generated analysis slides
+    ai_slides = ""
+    ai_sidebar = ""
+    if ai_analysis:
+        if ai_analysis.get("raw"):
+            # Fallback: wrap raw text
+            ai_slides = f'<section id="slide-ai" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><div class="text-slate-400 whitespace-pre-wrap">{esc(ai_analysis["raw"][:8000])}</div></div></section>'
+            ai_sidebar = '<li><a href="#slide-ai" class="block px-3 py-2 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">🤖 Analyse IA</a></li>\n'
+        else:
+            for key, slide_title in [("findings", "Surprises"), ("recommendations", "Recommandations"), ("untested", "Non Testés")]:
+                slide_html = ai_analysis.get(key)
+                if slide_html:
+                    # Strip LLM's outer <div class="slide..."> wrapper, re-wrap in proper <section>
+                    # The LLM outputs: <div id="slide-ai-xxx" class="slide px-8 py-24...">...content...</div>
+                    import re as re2
+                    inner = re.sub(r'^<div\s+id="slide-ai-[^"]*"\s+class="[^"]*slide[^"]*"[^>]*>', '', slide_html.strip())
+                    inner = re.sub(r'</div>\s*$', '', inner.strip())
+                    slide_html = f'<section id="slide-ai-{key}" class="slide px-8 py-24 border-t border-slate-800">\n  {inner}\n</section>'
+                    ai_slides += slide_html + "\n"
+                    ai_sidebar += f'<li><a href="#slide-ai-{key}" class="block px-3 py-2 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition">🤖 {slide_title}</a></li>\n'
+
+    # Inject AI sidebar links into the sidebar
+    sidebar = sidebar.replace('</ul>\n<div class="mt-4', f'{ai_sidebar}</ul>\n<div class="mt-4')
 
     # Method slide
     method_slide = '''<section id="slide-method" class="slide px-8 py-24 border-t border-slate-800">
@@ -348,11 +372,12 @@ def build_index_html(data, per_doc, aggregated):
 {doc_slides}
 {speed_slide}
 {rankings_slide}
+{ai_slides}
 
 </main></body></html>'''
 
 
-def rebuild_from_data(data=None):
+def rebuild_from_data(data=None, ai_analysis=None):
     """Main entry point called by run_pipeline.py."""
     if data is None:
         data = load_data()
@@ -363,7 +388,7 @@ def rebuild_from_data(data=None):
     docs_list = list(data.get("documents", {}).items())
 
     # Build index.html
-    index_html = build_index_html(data, per_doc, aggregated)
+    index_html = build_index_html(data, per_doc, aggregated, ai_analysis)
     (ROOT / "index.html").write_text(index_html, encoding='utf-8')
     print(f"  ✓ index.html ({len(docs_list)} documents)")
 
@@ -380,5 +405,6 @@ def rebuild_from_data(data=None):
 
 if __name__ == "__main__":
     data = load_data()
-    rebuild_from_data(data)
+    ai_analysis = data.get("ai_analysis")
+    rebuild_from_data(data, ai_analysis)
     print("✅ Site rebuilt")

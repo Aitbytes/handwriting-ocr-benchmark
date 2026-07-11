@@ -360,14 +360,136 @@ def main():
     rebuild_site(data)
 
 
+def generate_ai_analysis(data):
+    """Use DeepSeek V4 Pro to generate analysis slides from benchmark data."""
+    api_key = os.environ.get("OPENROUTER_API_KEY", "")
+    if not api_key:
+        print("⚠️  No OPENROUTER_API_KEY — skipping AI analysis")
+        return None
+
+    # Build a compact summary of results for the LLM
+    summary_lines = ["Voici les résultats d'un benchmark de reconnaissance d'écriture manuscrite:"]
+    summary_lines.append(f"- {data['meta']['total_documents']} documents testés, {data['meta']['total_models']} modèles, {data['meta']['total_runs']} transcriptions")
+    summary_lines.append(f"- Coût total: ${data['meta']['total_cost_usd']:.4f}")
+
+    for doc_id, doc_info in data.get("documents", {}).items():
+        summary_lines.append(f"\nDocument: {doc_info.get('title', doc_id)} — {doc_info.get('description', '')}")
+        results = data.get("results", {}).get(doc_id, {})
+        for model_id, r in sorted(results.items(), key=lambda x: x[1].get('elapsed_s', 999)):
+            if not r.get("success"):
+                summary_lines.append(f"  ❌ {model_id}: ÉCHEC — {r.get('error', '?')[:80]}")
+            else:
+                label = model_id
+                for m in data.get("models", []):
+                    if m["id"] == model_id: label = m["label"]; break
+                summary_lines.append(f"  ✅ {label}: {r['elapsed_s']:.1f}s, ${r.get('cost_usd',0):.6f}, {r.get('total_tokens',0)} tokens")
+
+    # Untested models
+    untested = ["olmOCR-2-7B-1025-FP8", "Moondream OCR", "DeepSeek OCR", "PaddleOCR-VL",
+                "Azure Cognitive Service", "Google Vision API", "Amazon Textract", "Mistral OCR"]
+    summary_lines.append(f"\nModèles non testés (nécessitent des APIs/clés séparées): {', '.join(untested)}")
+
+    summary = "\n".join(summary_lines)
+
+    prompt = f"""Analyse ce benchmark OCR et produis TROIS sections HTML en français. SOIS CONCIS.
+
+Section 1 (id="slide-ai-findings"): 4 cartes (grid-cols-2) — faits marquants, surprises, échecs.
+Section 2 (id="slide-ai-recommendations"): 4 cartes (grid-cols-2) — précision max, budget, pipeline, équilibré.
+Section 3 (id="slide-ai-untested"): liste des modèles non testés avec raison.
+
+Style: Tailwind dark (bg-slate-900/70 border-slate-800 rounded-2xl p-5). Format EXACT impératif:
+
+<div id="slide-ai-findings" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">Surprises &amp; Découvertes</h2><div class="grid grid-cols-2 gap-6">...4 cartes max 2 lignes...</div></div></div>
+<div id="slide-ai-recommendations" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">Recommandations</h2><div class="grid grid-cols-2 gap-6">...4 cartes...</div></div></div>
+<div id="slide-ai-untested" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-3">Modèles Non Testés</h2><p class="text-slate-400 mb-8">Modèles nécessitant des APIs dédiées</p><div class="space-y-4">...1 élément par modèle...</div></div></div>
+
+RÉSULTATS:
+{summary}"""
+
+    payload = json.dumps({
+        "model": "deepseek/deepseek-chat",
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": 8000,
+        "temperature": 0.7,
+    })
+
+    tmpfile = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
+    tmpfile.write(payload); tmpfile.close()
+
+    print("🤖 Génération de l'analyse par DeepSeek (V3)...")
+    try:
+        r = subprocess.run([
+            'curl', '-s', '--cacert', CERT_BUNDLE,
+            'https://openrouter.ai/api/v1/chat/completions',
+            '-H', f'Authorization: Bearer {api_key}',
+            '-H', 'Content-Type: application/json',
+            '-H', 'HTTP-Referer: https://github.com/Aitbytes/handwriting-ocr-benchmark',
+            '-d', f'@{tmpfile.name}', '--max-time', '300'
+        ], capture_output=True, text=True, timeout=120)
+        os.unlink(tmpfile.name)
+
+        resp = json.loads(r.stdout)
+        text = resp["choices"][0]["message"]["content"]
+        
+        # Extract the three div sections by splitting at known boundaries
+        import re
+        # Split at each slide boundary
+        parts = re.split(r'(?=<div id="slide-ai-(?:findings|recommendations|untested)")', text)
+        analysis = {"findings": None, "recommendations": None, "untested": None}
+        for part in parts:
+            part = part.strip()
+            for key in ["findings", "recommendations", "untested"]:
+                if part.startswith(f'<div id="slide-ai-{key}"'):
+                    # Count div depth to find the closing tag of the outer wrapper
+                    depth = 0
+                    end_pos = 0
+                    for m in re.finditer(r'</div>|<div\b', part):
+                        if m.group() == '</div>':
+                            depth -= 1
+                            if depth == 0:
+                                end_pos = m.end()
+                                break
+                        else:
+                            depth += 1
+                    analysis[key] = part[:end_pos] if end_pos > 0 else part
+                    break
+
+        if any(analysis.values()):
+            print(f"  ✅ Analyse générée: findings={'✓' if analysis['findings'] else '✗'}, recos={'✓' if analysis['recommendations'] else '✗'}, untested={'✓' if analysis['untested'] else '✗'}")
+            return analysis
+        else:
+            print(f"  ⚠️  Impossible d'extraire les sections. Réponse brute ({len(text)} chars):")
+            print(f"  {text[:300]}...")
+            # Store raw text as fallback
+            return {"raw": text[:8000]}
+
+    except Exception as e:
+        print(f"  ❌ Échec génération IA: {e}")
+        try: os.unlink(tmpfile.name)
+        except: pass
+        return None
+
+
 def rebuild_site(data):
     """Rebuild all dynamic HTML from data.json."""
     print("\n🔨 Rebuilding site...")
+
+    # Generate AI analysis (only if data changed or first run)
+    ai_analysis = None
+    if data.get("results"):
+        ai_analysis = generate_ai_analysis(data)
+        # Store in data for caching
+        if ai_analysis:
+            data["ai_analysis"] = ai_analysis
+            save_data(data)
+    elif data.get("ai_analysis"):
+        ai_analysis = data["ai_analysis"]
+
     # Import and run the site generator
     sys.path.insert(0, str(ROOT))
     try:
         from generate_site import rebuild_from_data
-        rebuild_from_data(data)
+        rebuild_from_data(data, ai_analysis)
         print("✅ Site rebuilt successfully")
     except ImportError:
         print("⚠️  generate_site.py not found or missing rebuild_from_data()")
