@@ -1,0 +1,14 @@
+3.3) a) Condition START : indique le debut d'une
+trame. Elle est caracterisé par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+b) Condition STOP : Signale la fin d'une communication
+et libere le bus. Elle se caracterise par un passage de
+la ligne SDA du niveau Bas au niveau Haut alors
+que la ligne SCL est au niveau Haut.
+
+c ) le bit ACK : Bit d'acquittement envoyé par le
+recepteur après la reception de chaque octet pour confirmer
+au transmetteur que la donnée a bien été reçue.
+
+4) a) Des resistances Pull-up : elles

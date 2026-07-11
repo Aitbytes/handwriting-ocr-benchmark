@@ -11,14 +11,93 @@
 <div class="max-w-6xl mx-auto px-6 py-8">
 <a href="../index.html" class="text-blue-400 hover:text-blue-300 text-sm mb-6 inline-block">← Retour au benchmark</a>
 <h1 class="text-4xl font-bold mb-2">Protocole I²C</h1>
-<p class="text-slate-400 mb-8">Écriture cursive française + code C embarqué — Réponse d'examen d'ingénierie sur le bus I²C · <span class="text-slate-500">5 transcriptions</span></p>
-<div class="flex flex-wrap gap-2 mb-8 border-b border-slate-800 pb-4"><button onclick="showTab('glm-46v')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition active bg-blue-500/20 text-blue-400" id="tab-glm-46v">GLM 4.6V</button>
+<p class="text-slate-400 mb-8">Écriture cursive française + code C embarqué — Réponse d'examen d'ingénierie sur le bus I²C · <span class="text-slate-500">13 transcriptions</span></p>
+<div class="flex flex-wrap gap-2 mb-8 border-b border-slate-800 pb-4"><button onclick="showTab('claude-sonnet-45')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition active bg-blue-500/20 text-blue-400" id="tab-claude-sonnet-45">Claude Sonnet 4.5</button>
+<button onclick="showTab('claude-sonnet-5')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-claude-sonnet-5">Claude Sonnet 5</button>
+<button onclick="showTab('glm-46v')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-glm-46v">GLM 4.6V</button>
+<button onclick="showTab('glm-ocr')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-glm-ocr">GLM OCR</button>
+<button onclick="showTab('gpt-56-sol')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-gpt-56-sol">GPT-5.6 Sol</button>
+<button onclick="showTab('gemini-25-pro')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-gemini-25-pro">Gemini 2.5 Pro</button>
+<button onclick="showTab('gemini-31-pro-preview')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-gemini-31-pro-preview">Gemini 3.1 Pro Preview</button>
+<button onclick="showTab('gemini-35-flash')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-gemini-35-flash">Gemini 3.5 Flash</button>
 <button onclick="showTab('gemma-4-31b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-gemma-4-31b">Gemma 4 31B</button>
 <button onclick="showTab('qwen25-vl-72b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-qwen25-vl-72b">Qwen2.5 VL 72B</button>
+<button onclick="showTab('qwen3-vl-235b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-qwen3-vl-235b">Qwen3 VL 235B</button>
 <button onclick="showTab('qwen3-vl-30b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-qwen3-vl-30b">Qwen3 VL 30B</button>
 <button onclick="showTab('qwen35-122b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-qwen35-122b">Qwen3.5 122B</button>
 </div>
-<div id="panel-glm-46v" class="tab-panel block"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">
+<div id="panel-claude-sonnet-45" class="tab-panel block"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.2) a) Condition START: indiquer le debut d'une
+trame. Elle est indiquer par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+b) Condition STOP: Signale la fin d'une communication
+et libre le bus. Elle se traduit par un passage de
+la ligne SDA du niveau Bas au niveau Haut lors
+que la ligne SCL est au niveau Haut.
+
+c) le bit ACK: Bit d'acquittement envoyé par le
+recepteur après la reception de chaque octet pour confirmer
+au transmetteur que les données à bien été reçue.
+
+4) a) Des restrictions Pull-up: elles maintiennent
+les lignes SDA et SCL à l'état logique Haut (1c) lorsque
+aucun composant ne force le bus à le mane
+
+b) Des adresses I²C des esclaves: Elles permettent
+au maître de abler un périphérique très précis sur
+le bus partagé, garantissant que seul l'esclave concerné
+interagit avec le maître.
+
+3.5) Void I2C_Init() {
+
+TWSR = 0x00 // Bites TW PS1 @ = 00 , Prescaler=1
+TW BR = 19 ; // Valeur calculée pour obtenir SCL = 400kHz
+TWCR = (1&lt;&lt;TWEN)//Activation du module I2C&amp;
+
+3.6) Void I2C_START() {
+TWCR = (1&lt;&lt;TWENT; if (1&amp;&amp; TWSTA)|(1&lt;&lt;TWINT)
+while(!(TWCR&amp;(1&lt;&lt;TWINT))); //Attend que le
+bit TWINT passe à 1 (Fin de l'action)
+Initialisation de TWBR;
+
+N.B: Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité</pre></div>
+<div id="panel-claude-sonnet-5" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START: indique le debut d'une
+trame. Elle est caracterisé par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+scl reste au niveau Haut.
+
+b) condition stop: Signale la fin d'une communication
+et libre le bus. Elle se caracterise par un passage de
+la ligne SDA du niveau Bas au niveau Haut alors
+que la ligne SCL est au niveau Haut.
+
+c ) le bit ACKE: Bit d'acquittement envoyé par le
+recepteur après la reception de chaque octet pour confirmer
+que transmetteur que la donnée a bien été recu.
+
+4) a) Des resistances Pull-up; elles maintiennent
+les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque
+aucun composant ne force le bus à la masse.
+
+b) Des adresses I²C des esclaves: Elles permettent
+au maître de cibler un peripherique bien specifique sur
+le bus partagé, garantissant que seul l'esclave concerné
+interagit avec le maître.
+
+3.5) Void I2C_Init() {
+
+TWSR = 0x00; // Bits TWPS0=00 -&gt; Prescaler=1
+TWBR = 12; // Valeur calculée pour obtenir FSCL=400 KHz
+TWCR = (1&lt;&lt;TWEN); //Activation du module I2C
+
+3.6) Void I2C_START() {
+TWCR = (1&lt;&lt;TWENT; If (1&lt;&lt;TWSTA)|(1&lt;&lt;TWEN)
+while ((TWCR&amp; (1&lt;&lt;TWINT))); // Attend que le
+bit TWINT passe à 1( Fin de l'action )
+Justification de TWBR;
+
+N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité</pre></div>
+<div id="panel-glm-46v" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">
 3.3) a) Condition START : Indique le début d'une trame. Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bas alors que la ligne SCL reste au niveau Haut.
 b) condition stop : Signale le fin d'une communication et lève le bus. Elle se caractérise par un passage de la ligne SDA du niveau Basou niveau Haut lors que la ligne SCL est au niveau Haut.
 c) le bit Ack : Bit d'acquittement envoyé par le recepteur après le recept ion de chaque octet pour confirmer au transmetteur que la donnée a bien été reçue.
@@ -29,6 +108,167 @@ TWCR = 0x04 // Bits TWEN=0φ → Prescaler=1 TWBR=1g : // Valeur calculée pour 
 3.6) Void I²C_START() {
 TWCR = (1&lt;&lt;TWEN); if (1&lt;&lt;TWSTA) | (1&lt;&lt;TWEN) while (1 (TWCR &amp; (1&lt;&lt;TWEN))); // Attend que le bit TWINT passe à 1 ( Fin de l'action ) → justification du TWBR ;
 N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité</pre></div>
+<div id="panel-glm-ocr" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START : indique le débruit d'une trame . Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bos olds que la ligne SCL reste au niveau Haut.
+
+b) condition stop : Signale le fin d'une communication et like le bus . Elle se caractérise par un passage de la ligne SDA du niveau Bos ou niveau Haut dans que la ligne SCL est au niveau Haut.
+
+c) le lat ACKHÉ: But d'acquittement envoyé non le
+
+recepteur après le recent vond le chaque odet pour confirmer
+
+au transmetteur que la donnée a rien été recue.
+
+4) a) Des resistances Pull-up : elles montiennent
+
+les lignes SDA ekscl à l'état logique Haut (Ucc) lorsque
+
+aucun composant me force le bus à la mosse.
+
+b) Nes adresses I'coles claves: Elles permettent
+
+qu'au moite de ubler un periphérique bien spécifique sur
+
+le bus patologe, garantissent que seul l'escloud concen-
+
+tent ouvert owerclé môlle.
+
+3=5) v_{mol} T_{2C} _ {mol} ()
+
+$ \mathrm{T W S R}=\emptyset \times \emptyset \emptyset // \mathrm{B i l o} \Delta \mathrm{T W P 1} \emptyset=\emptyset \emptyset \mathrm{P r e d c o l e n}=1 $
+
+$ \mathrm{T W B R}=1 \mathrm{g}; // \mathrm{V a l e u n c o l u c u l e e p o n o l t e n i n F S C L}=4 0 \mathrm{H n} $
+
+$ \mathrm{T W C R}=(4 &lt; \mathrm{T W E N}) // \mathrm{A c t i v i t i o n d u m o d u l e F 2 C E} $
+
+3.6) Void Γ9 C_START() L
+
+ΓWCR = (Δ &lt;&lt; ΓWENT; if (Δ &lt;&lt; ΓWSTA) | (Δ &lt;&lt; ΓWEN)
+
+while (1 (ΓWCR8 (Δ &lt;&lt; ΓWINT)); // Attend qu'elle
+
+but ΓWENT nome Δ (Fun del'action)
+
+institution de TWBR;</pre></div>
+<div id="panel-gpt-56-sol" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START : indique le début d’une
+trame. Elle est caractérisé par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+b) Condition Stop : Signale la fin d’une communication
+et libère le bus. Elle se caractérise par un passage de
+la ligne SDA du niveau Bas au niveau Haut alors
+que la ligne SCL est au niveau Haut.
+
+c) le bit ACK : Bit d’acquittement envoyé par le
+récepteur après la reception de chaque octet pour confirmer
+au transmetteur que la donnée a bien été reçue.
+
+4) a) Des résistances Pull-up; elles maintiennent
+les lignes SDA et SCL à l’état logique Haut (Vcc) lorsque
+aucun composant ne force le bus à la masse.
+
+b) Des adresses I²C des esclaves; Elles permettent
+au maître de cibler un périphérique bien spécifique sur
+le bus partagé, garantissant que seul l’esclave concerné
+interagit avec le maître.
+
+3.5) void I2C_Init() {
+⑤
+TWSR = 0x00; //Bits TWPS1:0 =00 -&gt; Prescaler=1
+TWBR=19; // valeur calculée pour obtenir FSCL=400 KHz
+TWCR = (1 &lt;&lt; TWEN); //Activation du module I2C
+
+3.6) void I2C_START() {
+④
+TWCR = (1 &lt;&lt; TWINT) | (1 &lt;&lt; TWSTA) | (1 &lt;&lt; TWEN);
+while (!(TWCR &amp; (1 &lt;&lt; TWINT))); //Attend que le
+bit TWINT passe à 1 (Fin de l’action)
+Justification de TWBR
+
+39</pre></div>
+<div id="panel-gemini-25-pro" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START: indique le debut d'une
+trame. Elle est caracterise par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+b) condition stop: Signale la fin d'une communication
+et libere le bus. Elle se caracterise par un passage de
+la ligne SDA du niveau Bas au niveau Haut alors
+que la ligne SCL est au niveau Haut.
+
+c) le bit ACK?: Bit d'acquittement envoyé par le
+recepteur apres la reception de chaque octet pour confirmer
+au transmetteur que la donnée a bien été reçue.
+
+4) a) Des resistances Pull-up: elles maintiennent
+les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque
+aucun composant ne force le bus à la masse.
+
+b) Des adresses I²C des esclaves: Elles permettent
+au maître de cibler un périphérique bien spécifique sur
+le bus partagé, garantissant que seul l'esclave concerné
+interagit avec le maître.
+
+3.5) Void I2C_Init() {
+TWSR = 0x00 // Bits TWP1:0 = 00 -&gt; Prescaler = 1
+TWBR = 19 // Valeur calculée pour obtenir FSCL = 400 KHz
+TWCR = (1 &lt;&lt; TWEN) // Activation du module I2C
+}
+
+3.6) Void I2C_START() {
+TWCR = (1 &lt;&lt; TWENT | (1 &lt;&lt; TWSTA) | (1 &lt;&lt; TWEN));
+while (!(TWCR &amp; (1 &lt;&lt; TWINT))); // Attend que le
+bit TWINT passe à 1 (Fin de l'action)
+Justification de TWBR:
+
+N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité
+38</pre></div>
+<div id="panel-gemini-31-pro-preview" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START : indique le debut d'une
+trame. Elle est caracterisé par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+b) Condition STOP : Signale la fin d'une communication
+et libere le bus. Elle se caracterise par un passage de
+la ligne SDA du niveau Bas au niveau Haut alors
+que la ligne SCL est au niveau Haut.
+
+c ) le bit ACK : Bit d'acquittement envoyé par le
+recepteur après la reception de chaque octet pour confirmer
+au transmetteur que la donnée a bien été reçue.
+
+4) a) Des resistances Pull-up : elles</pre></div>
+<div id="panel-gemini-35-flash" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START: indique le debut d'une
+trame. Elle est caracterisé par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+
+b) condition stop: Signale la fin d'une communication
+et libere le bus. Elle se caracterise par un passage de
+la ligne SDA du niveau Bas au niveau Haut alors
+que la ligne SCL est au niveau Haut.
+
+c) le bit ACK: Bit d'acquittement envoyé par le
+recepteur après la reception de chaque octet pour confirmer
+au transmetteur que la donnée a bien été reçue.
+
+4) a) Des resistances Pull-up: elles maintiennent
+les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque
+aucun composant ne force le bus à la masse.
+
+b) Des adresses I²C des esclaves: Elles permettent
+au maître de cibler un périphérique bien specifique sur
+le bus partagé, garantissant que seul l'esclave concerné
+interagit avec le maître.
+
+3.5) void I2C_Init() {
+TWSR = 0x00 // Bits TWPS1:0 = 00 -&gt; Prescaler = 1
+TWBR = 12; // Valeur calculée pour obtenir FSCL = 400 Khz
+TWCR = (1&lt;&lt;TWEN) // Activation du module I2C
+}
+
+3.6) void I2C_START() {
+TWCR = (1&lt;&lt;TWINT) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWEN)
+while (!(TWCR &amp; (1&lt;&lt;TWINT))); // Attend que le
+bit TWINT passe à 1 (Fin de l'action)
+- Justification de TWBR:</pre></div>
 <div id="panel-gemma-4-31b" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a.) Condition START : indique le début d'une
 trame. Elle est caractérisée par un passage de la ligne
 SDA d'un niveau Haut au niveau Bas alors que la ligne
@@ -78,6 +318,35 @@ while (!(TWCR &amp; (1 &lt;&lt; TWINT))); // Attend que le bit TWINT passe à 1 
 // Initialisation de TWBR :
 }
 
+N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité</pre></div>
+<div id="panel-qwen3-vl-235b" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START : indique le début d'une
+trame. Elle est inactive par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+b) Condition stop : Signale la fin d'une communication
+et libère le bus. Elle se caractérise par un passage de
+la ligne SDA du niveau Bas au niveau Haut alors
+que la ligne SCL est au niveau Haut.
+c) le bit Ack/Nack : Bit d'acquittement envoyé par le
+récepteur après le réception de chaque octet pour confirmer
+au transmetteur que la donnée a bien été reçue.
+4) a) Des résistances Pull-up : elles maintiennent
+les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque
+aucun composant ne force le bus à la masse.
+b) Des adresses I²C des esclaves : Elles permettent
+au maître de cibler un périphérique bien spécifique sur
+le bus partagé, garantissant que seul l'esclave concerné
+interagit avec le maître.
+3.5) void T2 (_Init() {
+TWSR = 0x00 ; // Bits TWPS1,0 = 00 -&gt; Prescaler = 1
+TWBR = 19 ; // Valeur calculée pour obtenir F_SCL = 400 kHz
+TWCR = (1&lt;&lt;TWEN); // Activation du module I2C
+}
+3.6) void I2C_START() {
+TWCR = (1&lt;&lt;TWINT) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWEN);
+while ( ! (TWCR &amp; (1&lt;&lt;TWINT)) ); // Attend que le
+bit TWINT passe à 0 (Fin de l'action)
+// vérification de TWBR ;
 N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité</pre></div>
 <div id="panel-qwen3-vl-30b" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START : indique le début d'une
 trame. Elle est caractérisée par un passage de la ligne

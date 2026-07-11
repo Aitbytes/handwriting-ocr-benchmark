@@ -1,0 +1,13 @@
+<table border="1"><tr><td colspan="2"></td></tr><tr><td>X</td><td></td></tr><tr><td colspan="2">Page</td></tr><tr><td colspan="2">5/42</td></tr><tr><td colspan="2">Sujet de l&#x27;Examen National du BTS - Session 2026-
+Épreuve : Modélisation et comportement des systèmes industriels
+Filière : Conception du Produit Industriel</td></tr></table>
+
+## Partie A : Analyse fonctionnelle et structurelle de la minipelle
+
+<table border="1"><tr><td>2 pt</td><td>1. Compléter le diagramme &lt;&lt; bête à cornes&gt;&gt; de la minipelle en mode travail.</td><td></td></tr></table>
+
+![](page=0,bbox=[186, 788, 730, 1009])
+
+<table border="1"><tr><td>2 pt</td><td>2. En considérant la configuration de travail compléter la chaine d’énergie de la minipelle et indiquer le type d’énergie à l'entrée et à la sortie de chaque bloc</td></tr></table>
+
+![](page=0,bbox=[60, 1189, 861, 1372])

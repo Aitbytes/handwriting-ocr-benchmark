@@ -1,0 +1,41 @@
+3.3) a) Condition START : indique le débruit d'une trame . Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bos olds que la ligne SCL reste au niveau Haut.
+
+b) condition stop : Signale le fin d'une communication et like le bus . Elle se caractérise par un passage de la ligne SDA du niveau Bos ou niveau Haut dans que la ligne SCL est au niveau Haut.
+
+c) le lat ACKHÉ: But d'acquittement envoyé non le
+
+recepteur après le recent vond le chaque odet pour confirmer
+
+au transmetteur que la donnée a rien été recue.
+
+4) a) Des resistances Pull-up : elles montiennent
+
+les lignes SDA ekscl à l'état logique Haut (Ucc) lorsque
+
+aucun composant me force le bus à la mosse.
+
+b) Nes adresses I'coles claves: Elles permettent
+
+qu'au moite de ubler un periphérique bien spécifique sur
+
+le bus patologe, garantissent que seul l'escloud concen-
+
+tent ouvert owerclé môlle.
+
+3=5) v_{mol} T_{2C} _ {mol} ()
+
+$ \mathrm{T W S R}=\emptyset \times \emptyset \emptyset // \mathrm{B i l o} \Delta \mathrm{T W P 1} \emptyset=\emptyset \emptyset \mathrm{P r e d c o l e n}=1 $
+
+$ \mathrm{T W B R}=1 \mathrm{g}; // \mathrm{V a l e u n c o l u c u l e e p o n o l t e n i n F S C L}=4 0 \mathrm{H n} $
+
+$ \mathrm{T W C R}=(4 < \mathrm{T W E N}) // \mathrm{A c t i v i t i o n d u m o d u l e F 2 C E} $
+
+3.6) Void Γ9 C_START() L
+
+ΓWCR = (Δ << ΓWENT; if (Δ << ΓWSTA) | (Δ << ΓWEN)
+
+while (1 (ΓWCR8 (Δ << ΓWINT)); // Attend qu'elle
+
+but ΓWENT nome Δ (Fun del'action)
+
+institution de TWBR;

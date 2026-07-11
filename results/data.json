@@ -130,7 +130,7 @@
         "total_tokens": 3420,
         "prompt_tokens": 1356,
         "completion_tokens": 2064,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/protocole_i2c_google_gemini-2.5-pro.txt"
       },
       "anthropic/claude-sonnet-4.5": {
         "success": true,
@@ -139,7 +139,7 @@
         "total_tokens": 2162,
         "prompt_tokens": 1650,
         "completion_tokens": 512,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/protocole_i2c_anthropic_claude-sonnet-4.5.txt"
       },
       "google/gemini-3.1-pro-preview": {
         "success": true,
@@ -148,7 +148,7 @@
         "total_tokens": 5126,
         "prompt_tokens": 1130,
         "completion_tokens": 3996,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/protocole_i2c_google_gemini-3.1-pro-preview.txt"
       },
       "openai/gpt-5.6-sol": {
         "success": true,
@@ -157,7 +157,7 @@
         "total_tokens": 4998,
         "prompt_tokens": 1514,
         "completion_tokens": 3484,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/protocole_i2c_openai_gpt-5.6-sol.txt"
       },
       "google/gemini-3.5-flash": {
         "success": true,
@@ -166,7 +166,7 @@
         "total_tokens": 1527,
         "prompt_tokens": 1130,
         "completion_tokens": 397,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/protocole_i2c_google_gemini-3.5-flash.txt"
       },
       "anthropic/claude-sonnet-5": {
         "success": true,
@@ -175,7 +175,7 @@
         "total_tokens": 2386,
         "prompt_tokens": 1730,
         "completion_tokens": 656,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/protocole_i2c_anthropic_claude-sonnet-5.txt"
       },
       "qwen/qwen3-vl-235b-a22b-instruct": {
         "success": true,
@@ -184,7 +184,7 @@
         "total_tokens": 1722,
         "prompt_tokens": 1279,
         "completion_tokens": 443,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/protocole_i2c_qwen_qwen3-vl-235b-a22b-instruct.txt"
       },
       "zai/glm-ocr": {
         "success": true,
@@ -193,7 +193,7 @@
         "total_tokens": 1756,
         "prompt_tokens": 1213,
         "completion_tokens": 543,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/protocole_i2c_zai_glm-ocr.txt"
       },
       "Qwen/Qwen2.5-VL-72B-Instruct": {
         "success": true,
@@ -258,7 +258,7 @@
         "total_tokens": 2696,
         "prompt_tokens": 983,
         "completion_tokens": 1713,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_openai_gpt-5.txt"
       },
       "google/gemini-2.5-pro": {
         "success": true,
@@ -267,7 +267,7 @@
         "total_tokens": 5434,
         "prompt_tokens": 1872,
         "completion_tokens": 3562,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_google_gemini-2.5-pro.txt"
       },
       "anthropic/claude-sonnet-4.5": {
         "success": true,
@@ -276,7 +276,7 @@
         "total_tokens": 1687,
         "prompt_tokens": 1646,
         "completion_tokens": 41,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_anthropic_claude-sonnet-4.5.txt"
       },
       "google/gemini-3.1-pro-preview": {
         "success": true,
@@ -285,7 +285,7 @@
         "total_tokens": 2846,
         "prompt_tokens": 1166,
         "completion_tokens": 1680,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_google_gemini-3.1-pro-preview.txt"
       },
       "openai/gpt-5.6-sol": {
         "success": true,
@@ -294,7 +294,7 @@
         "total_tokens": 2221,
         "prompt_tokens": 1814,
         "completion_tokens": 407,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_openai_gpt-5.6-sol.txt"
       },
       "google/gemini-3.5-flash": {
         "success": true,
@@ -303,7 +303,7 @@
         "total_tokens": 1192,
         "prompt_tokens": 1166,
         "completion_tokens": 26,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_google_gemini-3.5-flash.txt"
       },
       "anthropic/claude-sonnet-5": {
         "success": true,
@@ -312,7 +312,7 @@
         "total_tokens": 2081,
         "prompt_tokens": 2034,
         "completion_tokens": 47,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_anthropic_claude-sonnet-5.txt"
       },
       "qwen/qwen3-vl-235b-a22b-instruct": {
         "success": true,
@@ -321,7 +321,7 @@
         "total_tokens": 1723,
         "prompt_tokens": 1479,
         "completion_tokens": 244,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_qwen_qwen3-vl-235b-a22b-instruct.txt"
       },
       "zai/glm-ocr": {
         "success": true,
@@ -330,7 +330,7 @@
         "total_tokens": 1001,
         "prompt_tokens": 731,
         "completion_tokens": 270,
-        "transcription_file": null
+        "transcription_file": "results/transcriptions/examen_bts_zai_glm-ocr.txt"
       },
       "Qwen/Qwen2.5-VL-72B-Instruct": {
         "success": true,
