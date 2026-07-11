@@ -1,0 +1,19 @@
+Page
+Sujet de l'Examen National du BTS - Session 2026 -
+épreuve : Modélisation et comportement des systèmes industriels
+Filière : Conception du Produit Industriel
+5 / 42
+
+Partie A : Analyse fonctionnelle et structurelle de la minipelle
+
+Données : Document « la mise en situation et principe d'utilisation » cités ci dessus, et document techniques DT1,
+DT2, DT3, DT4
+
+1. Compléter le diagramme << bête à cornes>> de la minipelle en mode
+2 pt
+travail.
+
+(utilisateur) (chantier)
+Minipelle
+Permet de réaliser des opérations
+de chantier

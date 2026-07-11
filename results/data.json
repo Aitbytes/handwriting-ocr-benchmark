@@ -1,0 +1,398 @@
+{
+  "documents": {
+    "protocole_i2c": {
+      "title": "Protocole I²C",
+      "description": "Écriture cursive française + code C embarqué — Réponse d'examen d'ingénierie sur le bus I²C",
+      "tags": [
+        "Français",
+        "Cursive",
+        "Code C",
+        "Ingénierie"
+      ],
+      "fingerprint": "0abfda2ba226d9f395a740928155a7723ba089cd300e8aebbba3333d250071eb",
+      "added_at": "2026-07-11T01:00:00"
+    },
+    "examen_bts": {
+      "title": "Examen National BTS",
+      "description": "Formulaire structuré avec en-têtes, diagrammes et questions à plusieurs parties — Conception industrielle",
+      "tags": [
+        "Français",
+        "Structuré",
+        "Diagrammes",
+        "Formulaire"
+      ],
+      "fingerprint": "0abfda2ba226d9f395a740928155a7723ba089cd300e8aebbba3333d250071eb",
+      "added_at": "2026-07-11T01:00:00"
+    }
+  },
+  "models": [
+    {
+      "id": "openai/gpt-5",
+      "label": "GPT-5",
+      "source": "OpenRouter",
+      "enabled": true
+    },
+    {
+      "id": "openai/gpt-5.6-sol",
+      "label": "GPT-5.6 Sol",
+      "source": "OpenRouter",
+      "enabled": true
+    },
+    {
+      "id": "google/gemini-2.5-pro",
+      "label": "Gemini 2.5 Pro",
+      "source": "OpenRouter",
+      "enabled": true
+    },
+    {
+      "id": "google/gemini-3.1-pro-preview",
+      "label": "Gemini 3.1 Pro Preview",
+      "source": "OpenRouter",
+      "enabled": true
+    },
+    {
+      "id": "google/gemini-3.5-flash",
+      "label": "Gemini 3.5 Flash",
+      "source": "OpenRouter",
+      "enabled": true
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.5",
+      "label": "Claude Sonnet 4.5",
+      "source": "OpenRouter",
+      "enabled": true
+    },
+    {
+      "id": "anthropic/claude-sonnet-5",
+      "label": "Claude Sonnet 5",
+      "source": "OpenRouter",
+      "enabled": true
+    },
+    {
+      "id": "qwen/qwen3-vl-235b-a22b-instruct",
+      "label": "Qwen3 VL 235B",
+      "source": "OpenRouter",
+      "enabled": true
+    },
+    {
+      "id": "Qwen/Qwen3.5-122B-A10B",
+      "label": "Qwen3.5 122B",
+      "source": "HF Router",
+      "enabled": true
+    },
+    {
+      "id": "Qwen/Qwen2.5-VL-72B-Instruct",
+      "label": "Qwen2.5 VL 72B",
+      "source": "HF Router",
+      "enabled": true
+    },
+    {
+      "id": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+      "label": "Qwen3 VL 30B",
+      "source": "HF Router",
+      "enabled": true
+    },
+    {
+      "id": "google/gemma-4-31B-it",
+      "label": "Gemma 4 31B",
+      "source": "HF Router",
+      "enabled": true
+    },
+    {
+      "id": "zai-org/GLM-4.6V",
+      "label": "GLM 4.6V",
+      "source": "HF Router",
+      "enabled": true
+    },
+    {
+      "id": "zai/glm-ocr",
+      "label": "GLM OCR",
+      "source": "ZAI API",
+      "enabled": false
+    }
+  ],
+  "results": {
+    "protocole_i2c": {
+      "openai/gpt-5": {
+        "success": false,
+        "elapsed_s": 162.9,
+        "cost_usd": 0,
+        "total_tokens": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "transcription_file": null,
+        "error": "Empty content. Finish: length"
+      },
+      "google/gemini-2.5-pro": {
+        "success": true,
+        "elapsed_s": 18.82,
+        "cost_usd": 0.022335,
+        "total_tokens": 3420,
+        "prompt_tokens": 1356,
+        "completion_tokens": 2064,
+        "transcription_file": null
+      },
+      "anthropic/claude-sonnet-4.5": {
+        "success": true,
+        "elapsed_s": 15.8,
+        "cost_usd": 0.01263,
+        "total_tokens": 2162,
+        "prompt_tokens": 1650,
+        "completion_tokens": 512,
+        "transcription_file": null
+      },
+      "google/gemini-3.1-pro-preview": {
+        "success": true,
+        "elapsed_s": 102.27,
+        "cost_usd": 0.050212,
+        "total_tokens": 5126,
+        "prompt_tokens": 1130,
+        "completion_tokens": 3996,
+        "transcription_file": null
+      },
+      "openai/gpt-5.6-sol": {
+        "success": true,
+        "elapsed_s": 62.54,
+        "cost_usd": 0.113979,
+        "total_tokens": 4998,
+        "prompt_tokens": 1514,
+        "completion_tokens": 3484,
+        "transcription_file": null
+      },
+      "google/gemini-3.5-flash": {
+        "success": true,
+        "elapsed_s": 4.26,
+        "cost_usd": 0.005268,
+        "total_tokens": 1527,
+        "prompt_tokens": 1130,
+        "completion_tokens": 397,
+        "transcription_file": null
+      },
+      "anthropic/claude-sonnet-5": {
+        "success": true,
+        "elapsed_s": 11.97,
+        "cost_usd": 0.01002,
+        "total_tokens": 2386,
+        "prompt_tokens": 1730,
+        "completion_tokens": 656,
+        "transcription_file": null
+      },
+      "qwen/qwen3-vl-235b-a22b-instruct": {
+        "success": true,
+        "elapsed_s": 8.82,
+        "cost_usd": 0.000793,
+        "total_tokens": 1722,
+        "prompt_tokens": 1279,
+        "completion_tokens": 443,
+        "transcription_file": null
+      },
+      "zai/glm-ocr": {
+        "success": true,
+        "elapsed_s": 2.76,
+        "cost_usd": 5.3e-05,
+        "total_tokens": 1756,
+        "prompt_tokens": 1213,
+        "completion_tokens": 543,
+        "transcription_file": null
+      },
+      "Qwen/Qwen2.5-VL-72B-Instruct": {
+        "success": true,
+        "elapsed_s": 13.1,
+        "cost_usd": 0,
+        "total_tokens": 2018,
+        "prompt_tokens": 1626,
+        "completion_tokens": 392,
+        "transcription_file": "results/transcriptions/protocole_i2c_Qwen_Qwen2.5-VL-72B-Instruct.txt"
+      },
+      "Qwen/Qwen3-VL-30B-A3B-Instruct": {
+        "success": true,
+        "elapsed_s": 8.14,
+        "cost_usd": 0,
+        "total_tokens": 1696,
+        "prompt_tokens": 1251,
+        "completion_tokens": 445,
+        "transcription_file": "results/transcriptions/protocole_i2c_Qwen_Qwen3-VL-30B-A3B-Instruct.txt"
+      },
+      "google/gemma-4-31B-it": {
+        "success": true,
+        "elapsed_s": 5.09,
+        "cost_usd": 0,
+        "total_tokens": 747,
+        "prompt_tokens": 320,
+        "completion_tokens": 427,
+        "transcription_file": "results/transcriptions/protocole_i2c_google_gemma-4-31B-it.txt"
+      },
+      "zai-org/GLM-4.6V": {
+        "success": true,
+        "elapsed_s": 35.4,
+        "cost_usd": 0,
+        "total_tokens": 3316,
+        "prompt_tokens": 1613,
+        "completion_tokens": 1703,
+        "transcription_file": "results/transcriptions/protocole_i2c_zai-org_GLM-4.6V.txt"
+      },
+      "Qwen/Qwen3.5-122B-A10B": {
+        "success": true,
+        "elapsed_s": 5.59,
+        "cost_usd": 0,
+        "total_tokens": 1644,
+        "prompt_tokens": 1255,
+        "completion_tokens": 389,
+        "transcription_file": "results/transcriptions/protocole_i2c_Qwen_Qwen3.5-122B-A10B.txt"
+      },
+      "moonshotai/Kimi-K2.6": {
+        "success": true,
+        "elapsed_s": 26.91,
+        "cost_usd": 0,
+        "total_tokens": 5664,
+        "prompt_tokens": 1664,
+        "completion_tokens": 4000,
+        "transcription_file": null
+      }
+    },
+    "examen_bts": {
+      "openai/gpt-5": {
+        "success": true,
+        "elapsed_s": 32.38,
+        "cost_usd": 0.018359,
+        "total_tokens": 2696,
+        "prompt_tokens": 983,
+        "completion_tokens": 1713,
+        "transcription_file": null
+      },
+      "google/gemini-2.5-pro": {
+        "success": true,
+        "elapsed_s": 32.96,
+        "cost_usd": 0.03796,
+        "total_tokens": 5434,
+        "prompt_tokens": 1872,
+        "completion_tokens": 3562,
+        "transcription_file": null
+      },
+      "anthropic/claude-sonnet-4.5": {
+        "success": true,
+        "elapsed_s": 3.93,
+        "cost_usd": 0.005553,
+        "total_tokens": 1687,
+        "prompt_tokens": 1646,
+        "completion_tokens": 41,
+        "transcription_file": null
+      },
+      "google/gemini-3.1-pro-preview": {
+        "success": true,
+        "elapsed_s": 16.78,
+        "cost_usd": 0.022492,
+        "total_tokens": 2846,
+        "prompt_tokens": 1166,
+        "completion_tokens": 1680,
+        "transcription_file": null
+      },
+      "openai/gpt-5.6-sol": {
+        "success": true,
+        "elapsed_s": 13.39,
+        "cost_usd": 0.023544,
+        "total_tokens": 2221,
+        "prompt_tokens": 1814,
+        "completion_tokens": 407,
+        "transcription_file": null
+      },
+      "google/gemini-3.5-flash": {
+        "success": true,
+        "elapsed_s": 1.81,
+        "cost_usd": 0.001983,
+        "total_tokens": 1192,
+        "prompt_tokens": 1166,
+        "completion_tokens": 26,
+        "transcription_file": null
+      },
+      "anthropic/claude-sonnet-5": {
+        "success": true,
+        "elapsed_s": 4.46,
+        "cost_usd": 0.004538,
+        "total_tokens": 2081,
+        "prompt_tokens": 2034,
+        "completion_tokens": 47,
+        "transcription_file": null
+      },
+      "qwen/qwen3-vl-235b-a22b-instruct": {
+        "success": true,
+        "elapsed_s": 8.59,
+        "cost_usd": 0.000511,
+        "total_tokens": 1723,
+        "prompt_tokens": 1479,
+        "completion_tokens": 244,
+        "transcription_file": null
+      },
+      "zai/glm-ocr": {
+        "success": true,
+        "elapsed_s": 2.07,
+        "cost_usd": 3e-05,
+        "total_tokens": 1001,
+        "prompt_tokens": 731,
+        "completion_tokens": 270,
+        "transcription_file": null
+      },
+      "Qwen/Qwen2.5-VL-72B-Instruct": {
+        "success": true,
+        "elapsed_s": 2.65,
+        "cost_usd": 0,
+        "total_tokens": 1914,
+        "prompt_tokens": 1886,
+        "completion_tokens": 28,
+        "transcription_file": "results/transcriptions/examen_bts_Qwen_Qwen2.5-VL-72B-Instruct.txt"
+      },
+      "Qwen/Qwen3-VL-30B-A3B-Instruct": {
+        "success": true,
+        "elapsed_s": 4.31,
+        "cost_usd": 0,
+        "total_tokens": 1705,
+        "prompt_tokens": 1451,
+        "completion_tokens": 254,
+        "transcription_file": "results/transcriptions/examen_bts_Qwen_Qwen3-VL-30B-A3B-Instruct.txt"
+      },
+      "google/gemma-4-31B-it": {
+        "success": true,
+        "elapsed_s": 1.07,
+        "cost_usd": 0,
+        "total_tokens": 473,
+        "prompt_tokens": 318,
+        "completion_tokens": 155,
+        "transcription_file": "results/transcriptions/examen_bts_google_gemma-4-31B-it.txt"
+      },
+      "zai-org/GLM-4.6V": {
+        "success": true,
+        "elapsed_s": 20.18,
+        "cost_usd": 0,
+        "total_tokens": 3557,
+        "prompt_tokens": 1873,
+        "completion_tokens": 1684,
+        "transcription_file": "results/transcriptions/examen_bts_zai-org_GLM-4.6V.txt"
+      },
+      "Qwen/Qwen3.5-122B-A10B": {
+        "success": true,
+        "elapsed_s": 3.19,
+        "cost_usd": 0,
+        "total_tokens": 1684,
+        "prompt_tokens": 1455,
+        "completion_tokens": 229,
+        "transcription_file": "results/transcriptions/examen_bts_Qwen_Qwen3.5-122B-A10B.txt"
+      },
+      "moonshotai/Kimi-K2.6": {
+        "success": true,
+        "elapsed_s": 36.18,
+        "cost_usd": 0,
+        "total_tokens": 5968,
+        "prompt_tokens": 1968,
+        "completion_tokens": 4000,
+        "transcription_file": null
+      }
+    }
+  },
+  "meta": {
+    "last_run": "2026-07-11T13:48:59.180526",
+    "total_documents": 2,
+    "total_models": 13,
+    "total_runs": 29,
+    "total_cost_usd": 0.3303
+  }
+}

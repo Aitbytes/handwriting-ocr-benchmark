@@ -1,0 +1,22 @@
+3.3) a) Condition START : indique le début d'une trame. Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bas alors que la ligne SCL reste au niveau Haut.
+b) Condition STOP : Signale la fin d'une communication et libère le bus. Elle se caractérise par un passage de la ligne SDA du niveau Bas au niveau Haut alors que la ligne SCL est au niveau Haut.
+
+c) Le bit ACK : Bit d'acquittement envoyé par le récepteur après la réception de chaque octet pour confirmer au transmetteur que la donnée a bien été reçue.
+
+4) a) Des résistances Pull-up : elles maintiennent les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque aucun composant ne force le bus à la masse.
+b) Des adresses I²C des esclaves : Elles permettent au maître de cibler un périphérique bien spécifique sur le bus partagé, garantissant que seul l'esclave concerné interagit avec le maître.
+
+3.5) void T2C_Init()
+{
+TWSR = 0x00 // Bits TWPS1:0 = 00 -> Prescaler = 1
+TWBR = 19 // Valeur calculée pour obtenir F_SCL = 400 Hz
+TWAR = (A << TWEN) // Activation du module TWCE
+
+3.6) void I2C_START()
+{
+TWCR = (1 << TWINT; | (1 << TWSTA) | (1 << TWEN)
+while (!(TWCR & (1 << TWINT))); // Attend que le bit TWINT passe à 1 (Fin de l'action)
+// Initialisation de TWBR :
+}
+
+N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité

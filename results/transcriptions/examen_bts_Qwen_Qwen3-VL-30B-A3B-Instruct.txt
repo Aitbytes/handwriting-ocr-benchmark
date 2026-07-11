@@ -1,0 +1,35 @@
+Page
+5 / 42
+Sujet de l'Examen National du BTS - Session 2026 -
+Épreuve : Modélisation et comportement des systèmes industriels
+Filière : Conception du Produit Industriel
+
+Partie A : Analyse fonctionnelle et structurelle de la minipelle
+
+Données : Document « la mise en situation et principe d'utilisation » cités ci dessus, et document techniques DT1,
+DT2, DT3, DT4
+
+2 pt
+1. Compléter le diagramme << bête à cornes>> de la minipelle en mode
+travail.
+
+utilisé Sateu
+Chantier
+Minipelle
+Permet de réaliser des opérations
+de chantier
+
+2 pt
+2. En considérant la configuration de travail compléter la chaîne
+d'énergie de la minipelle et indiquer le type d'énergie à l'entrée et à la
+sortie de chaque bloc
+
+Alimenter
+Moteur thermique
+Pompe
+hydraulique
+Distribuer
+Venin...
+distribu
+...Convertisse
+Godet

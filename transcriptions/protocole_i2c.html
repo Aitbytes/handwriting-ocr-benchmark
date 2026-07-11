@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Transcriptions — Protocole I²C | Benchmark OCR</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>body{font-family:"Inter",system-ui,sans-serif}.tab-btn.active{background:rgba(59,130,246,.2);color:#60a5fa}</style>
+<script>function showTab(id){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.add('hidden'));document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active','bg-blue-500/20','text-blue-400');b.classList.add('text-slate-400','hover:text-white','hover:bg-slate-800')});document.getElementById('panel-'+id).classList.remove('hidden');var btn=document.getElementById('tab-'+id);btn.classList.add('active','bg-blue-500/20','text-blue-400');btn.classList.remove('text-slate-400','hover:text-white','hover:bg-slate-800');window.location.hash=id}window.onload=function(){var h=window.location.hash.substring(1);if(h)showTab(h)}</script>
+</head>
+<body class="bg-slate-950 text-white min-h-screen">
+<div class="max-w-6xl mx-auto px-6 py-8">
+<a href="../index.html" class="text-blue-400 hover:text-blue-300 text-sm mb-6 inline-block">← Retour au benchmark</a>
+<h1 class="text-4xl font-bold mb-2">Protocole I²C</h1>
+<p class="text-slate-400 mb-8">Écriture cursive française + code C embarqué — Réponse d'examen d'ingénierie sur le bus I²C · <span class="text-slate-500">5 transcriptions</span></p>
+<div class="flex flex-wrap gap-2 mb-8 border-b border-slate-800 pb-4"><button onclick="showTab('glm-46v')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition active bg-blue-500/20 text-blue-400" id="tab-glm-46v">GLM 4.6V</button>
+<button onclick="showTab('gemma-4-31b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-gemma-4-31b">Gemma 4 31B</button>
+<button onclick="showTab('qwen25-vl-72b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-qwen25-vl-72b">Qwen2.5 VL 72B</button>
+<button onclick="showTab('qwen3-vl-30b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-qwen3-vl-30b">Qwen3 VL 30B</button>
+<button onclick="showTab('qwen35-122b')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white hover:bg-slate-800" id="tab-qwen35-122b">Qwen3.5 122B</button>
+</div>
+<div id="panel-glm-46v" class="tab-panel block"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">
+3.3) a) Condition START : Indique le début d'une trame. Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bas alors que la ligne SCL reste au niveau Haut.
+b) condition stop : Signale le fin d'une communication et lève le bus. Elle se caractérise par un passage de la ligne SDA du niveau Basou niveau Haut lors que la ligne SCL est au niveau Haut.
+c) le bit Ack : Bit d'acquittement envoyé par le recepteur après le recept ion de chaque octet pour confirmer au transmetteur que la donnée a bien été reçue.
+4) a) Des résistances Pull up : Elles maintiennent les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque aucun composant ne force le bus à la masse
+b) Des adresses I²C désencodées : Elles permettent au maître de adresser un périphérique bien spécifique sur le bus I²C, garantissant que seul l'esclav concerné interagit avec le maître.
+3.5) Void I²C_Init() {
+TWCR = 0x04 // Bits TWEN=0φ → Prescaler=1 TWBR=1g : // Valeur calculée pour obtenir FSCL=400kHz TWCR = (1&lt;&lt;TWEN) // Activation du module I²C
+3.6) Void I²C_START() {
+TWCR = (1&lt;&lt;TWEN); if (1&lt;&lt;TWSTA) | (1&lt;&lt;TWEN) while (1 (TWCR &amp; (1&lt;&lt;TWEN))); // Attend que le bit TWINT passe à 1 ( Fin de l'action ) → justification du TWBR ;
+N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité</pre></div>
+<div id="panel-gemma-4-31b" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a.) Condition START : indique le début d'une
+trame. Elle est caractérisée par un passage de la ligne
+SDA d'un niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+b.) Condition Stop : Signale la fin d'une communication
+et libère le bus. Elle se traduit par un passage de
+la ligne SDA du niveau Bas au niveau Haut lors
+que la ligne SCL est au niveau Haut.
+c.) le bit ACK : But d'acquittement envoyé par le
+recepteur après le recept ion de chaque octet pour confirmer
+au transmetteur que la donnée a bien été reçue.
+4.) a.) Des résistances Pull-up : elles maintiennent
+les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque
+aucun composant ne force le bus à la masse.
+b.) Des adresses d'esclaves : Elles permettent
+qu'un maître d'interroger un périphérique bien spécifique sur
+le bus partagé, garantissant que seul l'esclave concerné
+interagit avec maître.
+3.5) void I2C_Init() {
+TWSR = 0x09 // Bites TW P1 0 = 00 Prescaler = 1
+TWBR = 12 // Valeur calculée pour obtenir FSCL = 100 kHz
+TWCR = (1 &lt;&lt; TWEN) // Activation du module TWI
+3.6) void I2C_START() {
+TWCR = (1 &lt;&lt; TWEN) | (1 &lt;&lt; TWSTA) | (1 &lt;&lt; TWEN)
+while (1 (TWCR &amp; (1 &lt;&lt; TWINT))); // Attend que le
+bit TWINT pose à 1 (Fin de l'action)
+Justification de TWBR :
+N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité 352</pre></div>
+<div id="panel-qwen25-vl-72b" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START : indique le début d'une trame. Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bas alors que la ligne SCL reste au niveau Haut.
+b) Condition STOP : Signale la fin d'une communication et libère le bus. Elle se caractérise par un passage de la ligne SDA du niveau Bas au niveau Haut alors que la ligne SCL est au niveau Haut.
+
+c) Le bit ACK : Bit d'acquittement envoyé par le récepteur après la réception de chaque octet pour confirmer au transmetteur que la donnée a bien été reçue.
+
+4) a) Des résistances Pull-up : elles maintiennent les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque aucun composant ne force le bus à la masse.
+b) Des adresses I²C des esclaves : Elles permettent au maître de cibler un périphérique bien spécifique sur le bus partagé, garantissant que seul l'esclave concerné interagit avec le maître.
+
+3.5) void T2C_Init()
+{
+TWSR = 0x00 // Bits TWPS1:0 = 00 -&gt; Prescaler = 1
+TWBR = 19 // Valeur calculée pour obtenir F_SCL = 400 Hz
+TWAR = (A &lt;&lt; TWEN) // Activation du module TWCE
+
+3.6) void I2C_START()
+{
+TWCR = (1 &lt;&lt; TWINT; | (1 &lt;&lt; TWSTA) | (1 &lt;&lt; TWEN)
+while (!(TWCR &amp; (1 &lt;&lt; TWINT))); // Attend que le bit TWINT passe à 1 (Fin de l'action)
+// Initialisation de TWBR :
+}
+
+N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité</pre></div>
+<div id="panel-qwen3-vl-30b" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">3.3) a) Condition START : indique le début d'une
+trame. Elle est caractérisée par un passage de la ligne
+SDA du niveau Haut au niveau Bas alors que la ligne
+SCL reste au niveau Haut.
+b) Condition stop : signale la fin d'une communication
+et libère le bus. Elle se caractérise par un passage de
+la ligne SDA du niveau Bas au niveau Haut dans
+que la ligne SCL est au niveau Haut.
+c) Le bit Ack : Bit d'acquittement envoyé par le
+récepteur après la réception de chaque octet pour confirmer
+ou transmetteur que la donnée a bien été reçue.
+4) a) Des résistances Pull-up : elles maintiennent
+les lignes SDA et SCL à l'état logique Haut (1) lorsque
+aucun composant ne force le bus à la masse.
+b) Des adresses I2C des esclaves : Elles permettent
+au maître de sélectionner un périphérique bien spécifique parmi
+de tous les matériels, garantissant que seul l'esclave concerné
+interagit avec le maître.
+
+3.5) void T2C_Init()
+{
+TWSR = 0x00 // Bits TW P1:0 = 00 _ Prescaler = 1
+TW BR = 19 ; // Valeur calculée pour obtenir FSCl = 400 Hn
+TWCR = (1 &lt;&lt; TWEN) // Activation du module T2C8
+}
+
+3.6) void I2C_START()
+{
+TWCR = (1 &lt;&lt; TWINT | 1 &amp; (1 &lt;&lt; TWSTA) || (1 &lt;&lt; TWST);
+while (! (TWCR &amp; (1 &lt;&lt; TWINT))); // Attend que le
+bit TWINT passe à 1 (Fin de l'action)
+- justification de TWR ;
+N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité</pre></div>
+<div id="panel-qwen35-122b" class="tab-panel hidden"><pre class="text-sm text-slate-300 font-mono whitespace-pre-wrap leading-relaxed bg-slate-950/50 rounded-xl p-5 border border-slate-800">Based on the visual content of the image, I need to transcribe the handwritten text. I will go through the document section by section, from top to bottom.
+
+**Section 3.3:**
+-   **3.3) a)** &quot;Condition START : indique le début d'une trame. Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bas alors que la ligne SCL reste au niveau Haut.&quot;
+-   **b)** &quot;Condition Stop : Signale la fin d'une communication et libère le bus. Elle se caractérise par un passage de la ligne SDA du niveau Bas au niveau Haut alors que la ligne SCL est au niveau Haut.&quot;
+-   **c)** &quot;le bit ACK : Bit d'acquittement envoyé par le récepteur après la réception de chaque octet pour confirmer au transmetteur que la donnée a bien été reçue.&quot;
+
+**Section 4:**
+-   **4) a)** &quot;Des résistances Pull-up : elles maintiennent les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque aucun composant ne force le bus à la masse.&quot;
+-   **b)** &quot;Des adresses I²C des esclaves : Elles permettent au maître de cibler un périphérique bien spécifique sur le bus partagé, garantissant que seul l'esclave concerné interagisse avec le maître.&quot;
+
+**Section 3.5 (Code snippet):**
+-   **3.5)** &quot;void I2c_Init() {&quot;
+-   &quot;TWSR = 0x00 // Bits TWPS1,0 = 00 -&gt; Prescaler = 1&quot;
+-   &quot;TWBR = 19 ; // Valeur calculée pour obtenir FSCL = 400kHz&quot;
+-   &quot;TWCR = (1&lt;&lt;TWEN) // Activation du module I2CE&quot; (Note: The text looks like &quot;I2CE&quot; or &quot;I2C&quot;. Let's look closer. It looks like &quot;I2C&quot; with a scribble or maybe &quot;I2CE&quot;. Wait, looking at the context, it's likely &quot;I2C&quot;. Actually, looking very closely at the last line of this block, it looks like &quot;I2CE&quot; or maybe a scribbled &quot;I2C&quot;. Let's assume standard I2C register names. Wait, looking at the very end, it looks like &quot;I2C&quot; followed by a scribble. Let's transcribe what is visible. It looks like &quot;I2C&quot; then a scribble. Let's look at the next section. Ah, the text is &quot;Activation du module I2C&quot;. The last letter looks like a scribbled E or just a stray mark. I will transcribe it as &quot;I2C&quot; or &quot;I2CE&quot; based on visual. It looks like &quot;I2C&quot; with a scribble. Let's look at the code below. &quot;TWCR&quot;. Okay. Let's transcribe &quot;I2C&quot; but note the scribble. Actually, looking really closely, it looks like &quot;I2C&quot; then a scribble that looks like an 'E'. Let's stick to &quot;I2C&quot; as it makes sense technically, but visually it's ambiguous. Wait, let me re-read the line. &quot;TWCR = (1&lt;&lt;TWEN) // Activation du module I2C&quot;. The last part is messy. Let's look at the next section.
+-   Wait, let's look at the line &quot;TWBR = 19&quot;. The comment says &quot;pour obtenir FSCL = 400kHz&quot;.
+-   Let's look at the line &quot;TWCR = (1&lt;&lt;TWEN)&quot;. The comment is &quot;Activation du module I2C&quot;. The last character looks like a scribbled 'E' or just a messy 'C'. I will write &quot;I2C&quot;.
+
+**Section 3.6 (Code snippet):**
+-   **3.6)** &quot;void I2c_START() {&quot;
+-   &quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; Wait, let's look closer.
+    -   &quot;TWCR = (1&lt;&lt;TWEN); if ((1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; No, that's not right.
+    -   Let's re-examine the code block.
+    -   Line 1: &quot;TWCR = (1&lt;&lt;TWEN); if ((1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; This looks like a mix of code and comments or a specific syntax.
+    -   Actually, let's look at the handwritten text carefully.
+    -   &quot;TWCR = (1&lt;&lt;TWEN); if ((1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; This part is messy.
+    -   Let's look at the next line: &quot;while (!(TWCR &amp; (1&lt;&lt;TWINT))); // Attend que le&quot;
+    -   Next line: &quot;bit TWINT passe à 1 (Fin de l'action)&quot;
+    -   Next line: &quot;= vérification de TWBR ;&quot; -&gt; This looks like &quot;= vérification de TWBR ;&quot; or maybe &quot;- vérification...&quot;. It looks like an equals sign or a dash. Let's assume it's part of the logic or a note.
+    -   Let's re-read the first line of 3.6 carefully.
+    -   &quot;TWCR = (1&lt;&lt;TWEN); if ((1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; This doesn't look like valid C code. It looks like the student is writing pseudo-code or mixing things up.
+    -   Let's look at the symbols. &quot;TWCR = (1 &lt;&lt; TWEN) | (1 &lt;&lt; TWSTA) | (1 &lt;&lt; TWINT)&quot;. Ah, the vertical bars look like pipes `|`.
+    -   So: `TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)`
+    -   Then `while (!(TWCR &amp; (1&lt;&lt;TWINT))); // Attend que le`
+    -   Then `bit TWINT passe à 1 (Fin de l'action)`
+    -   Then `= vérification de TWBR ;` -&gt; This line is weird. It looks like `= vérification de TWBR ;`. Or maybe it's `- vérification...`. Let's look at the symbol. It looks like an equals sign `=`.
+
+**Footer:**
+-   &quot;N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité&quot;
+-   Page number &quot;39&quot; in the corner.
+
+**Refining the transcription:**
+-   **3.3 a)** &quot;Condition START : indique le début d'une trame. Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bas alors que la ligne SCL reste au niveau Haut.&quot;
+-   **b)** &quot;Condition Stop : Signale la fin d'une communication et libère le bus. Elle se caractérise par un passage de la ligne SDA du niveau Bas au niveau Haut alors que la ligne SCL est au niveau Haut.&quot;
+-   **c)** &quot;le bit ACK : Bit d'acquittement envoyé par le récepteur après la réception de chaque octet pour confirmer au transmetteur que la donnée a bien été reçue.&quot;
+-   **4 a)** &quot;Des résistances Pull-up : elles maintiennent les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque aucun composant ne force le bus à la masse.&quot;
+-   **b)** &quot;Des adresses I²C des esclaves : Elles permettent au maître de cibler un périphérique bien spécifique sur le bus partagé, garantissant que seul l'esclave concerné interagisse avec le maître.&quot;
+-   **3.5)** &quot;void I2c_Init() {&quot;
+    -   &quot;TWSR = 0x00 // Bits TWPS1,0 = 00 -&gt; Prescaler = 1&quot;
+    -   &quot;TWBR = 19 ; // Valeur calculée pour obtenir FSCL = 400kHz&quot;
+    -   &quot;TWCR = (1&lt;&lt;TWEN) // Activation du module I2C&quot; (The last part looks like &quot;I2C&quot; with a scribble, possibly &quot;I2CE&quot; but &quot;I2C&quot; is standard. I will transcribe &quot;I2C&quot; but maybe add the scribble if it looks like a letter. It looks like a scribbled 'E'. Let's look really close. It looks like &quot;I2C&quot; then a vertical line then a horizontal line. Maybe &quot;I2CE&quot;. I'll stick to &quot;I2C&quot; as it's the module name, but the handwriting is messy. Actually, looking at the very end of the line, it looks like &quot;I2C&quot; followed by a scribble that looks like an 'E'. I will write &quot;I2C&quot; to be safe, or &quot;I2CE&quot; if I must be literal. Let's look at the context. It's an AVR microcontroller. The module is TWI (Two Wire Interface) often called I2C. The register is TWCR. So &quot;module I2C&quot; makes sense. The scribble might just be a stray mark. I will transcribe &quot;I2C&quot;.)
+-   **3.6)** &quot;void I2c_START() {&quot;
+    -   &quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; Wait, looking at the image again.
+    -   Line: &quot;TWCR = (1&lt;&lt;TWEN); if ((1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; No, that's not right.
+    -   Let's look at the symbols again.
+    -   &quot;TWCR = (1 &lt;&lt; TWEN) | (1 &lt;&lt; TWSTA) | (1 &lt;&lt; TWINT)&quot; -&gt; The vertical bars are distinct.
+    -   Wait, is there a semicolon? &quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; No semicolon visible at the end of that line.
+    -   Next line: &quot;while (!(TWCR &amp; (1&lt;&lt;TWINT))); // Attend que le&quot;
+    -   Next line: &quot;bit TWINT passe à 1 (Fin de l'action)&quot;
+    -   Next line: &quot;= vérification de TWBR ;&quot; -&gt; This line is indented. It looks like &quot;= vérification de TWBR ;&quot;.
+
+Let's do a final pass on the text.
+-   &quot;3.3) a) Condition START : indique le début d'une trame. Elle est caractérisée par un passage de la ligne SDA du niveau Haut au niveau Bas alors que la ligne SCL reste au niveau Haut.&quot;
+-   &quot;b) Condition Stop : Signale la fin d'une communication et libère le bus. Elle se caractérise par un passage de la ligne SDA du niveau Bas au niveau Haut alors que la ligne SCL est au niveau Haut.&quot;
+-   &quot;c) le bit ACK : Bit d'acquittement envoyé par le récepteur après la réception de chaque octet pour confirmer au transmetteur que la donnée a bien été reçue.&quot;
+-   &quot;4) a) Des résistances Pull-up : elles maintiennent les lignes SDA et SCL à l'état logique Haut (Vcc) lorsque aucun composant ne force le bus à la masse.&quot;
+-   &quot;b) Des adresses I²C des esclaves : Elles permettent au maître de cibler un périphérique bien spécifique sur le bus partagé, garantissant que seul l'esclave concerné interagisse avec le maître.&quot;
+-   &quot;3.5) void I2c_Init() {&quot;
+-   &quot;TWSR = 0x00 // Bits TWPS1,0 = 00 -&gt; Prescaler = 1&quot;
+-   &quot;TWBR = 19 ; // Valeur calculée pour obtenir FSCL = 400kHz&quot;
+-   &quot;TWCR = (1&lt;&lt;TWEN) // Activation du module I2C&quot; (The scribble at the end looks like an 'E' or a cross. I'll transcribe &quot;I2C&quot; as it's the most logical interpretation, but looking really closely at crop 5, it looks like &quot;I2C&quot; then a scribble. Wait, looking at crop 5, the last line is &quot;TWCR = (1&lt;&lt;TWEN) // Activation du module I2C&quot;. The 'C' is followed by a vertical stroke and a horizontal stroke. It looks like an 'E'. So &quot;I2CE&quot;. But &quot;I2C&quot; is the standard name. I will transcribe &quot;I2C&quot; but maybe the student wrote &quot;I2CE&quot;. Let's look at the very end of the line. It looks like &quot;I2C&quot; then a scribble. I will write &quot;I2C&quot;.)
+-   &quot;3.6) void I2c_START() {&quot;
+-   &quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; Wait, looking at the image, there is a semicolon after TWEN? No.
+-   Let's look at the line: &quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot;. The vertical bars are clear.
+-   Wait, let's look at the line below &quot;TWCR = ...&quot;.
+-   &quot;while (!(TWCR &amp; (1&lt;&lt;TWINT))); // Attend que le&quot;
+-   &quot;bit TWINT passe à 1 (Fin de l'action)&quot;
+-   &quot;= vérification de TWBR ;&quot; -&gt; This line is strange. It looks like &quot;= vérification de TWBR ;&quot;.
+
+Let's re-examine the code in 3.6.
+-   &quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot; -&gt; This sets the Start condition bit.
+-   &quot;while (!(TWCR &amp; (1&lt;&lt;TWINT))); // Attend que le&quot; -&gt; Wait for interrupt flag.
+-   &quot;bit TWINT passe à 1 (Fin de l'action)&quot;
+-   &quot;= vérification de TWBR ;&quot; -&gt; This line is weird. Maybe it's &quot;- vérification de TWBR ;&quot;. Or maybe it's part of the previous thought. It looks like an equals sign.
+
+Let's look at the very bottom text.
+-   &quot;N.B : Il est interdit aux candidats de signer leur composition ou d'y mettre un signe quelconque pouvant révéler leur identité&quot;
+-   &quot;39&quot;
+
+Okay, I'm ready to write the final output. I will preserve the line breaks and structure.
+
+One detail: In 3.5, the line &quot;TWCR = (1&lt;&lt;TWEN) // Activation du module I2C&quot;. The last part looks like &quot;I2C&quot; with a scribble. I'll just write &quot;I2C&quot;.
+In 3.6, the line &quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot;. Wait, looking really closely at the image, the first part is &quot;TWCR = (1&lt;&lt;TWEN)&quot;. Then there is a vertical bar `|`. Then `(1&lt;&lt;TWSTA)`. Then a vertical bar `|`. Then `(1&lt;&lt;TWINT)`.
+Wait, looking at the very first line of code in 3.6: &quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot;.
+Actually, looking at the image, there is a semicolon after TWEN? No.
+Let's look at the symbols.
+&quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot;
+Wait, is it `|` or `;`?
+The symbol after `(1&lt;&lt;TWEN)` looks like a vertical bar `|`.
+The symbol after `(1&lt;&lt;TWSTA)` looks like a vertical bar `|`.
+So it's setting multiple bits. This is correct for starting an I2C transmission.
+Then the next line is `while (!(TWCR &amp; (1&lt;&lt;TWINT)));`. This waits for the interrupt flag.
+Then `bit TWINT passe à 1 (Fin de l'action)`.
+Then `= vérification de TWBR ;`. This line is indented and starts with `=`. It's likely a note or a mistake by the student. I will transcribe it as written.
+
+Let's double check the &quot;I2CE&quot; vs &quot;I2C&quot; in section 3.5.
+The text is &quot;Activation du module I2C&quot;. The 'C' is followed by a vertical line and a horizontal line. It looks like an 'E'. So &quot;I2CE&quot;. But &quot;I2C&quot; is the standard. I will transcribe &quot;I2C&quot; but maybe add the 'E' if it's distinct. It looks like a scribbled 'E'. I'll write &quot;I2C&quot; to be safe as it's the correct term, but the prompt says &quot;verbatim&quot;. So I should write what is there. It looks like &quot;I2C&quot; then a scribble. I'll write &quot;I2C&quot;. Wait, looking at crop 5, the last word is &quot;I2C&quot; followed by a scribble that looks like an 'E'. I will write &quot;I2C&quot;.
+
+Let's look at the &quot;3.5&quot; part. The number &quot;3.5&quot; is crossed out and rewritten? No, it looks like &quot;3.5&quot; with a scribble over the 5? Or maybe &quot;3.5&quot; is written over &quot;3.3&quot;? No, it looks like &quot;3.5&quot;.
+Actually, looking at the top left, there is a &quot;3.3&quot;.
+Then &quot;4)&quot;.
+Then &quot;3.5)&quot;. The &quot;3&quot; is written over something? No, it looks like &quot;3.5&quot;.
+Then &quot;3.6)&quot;.
+
+Let's look at the code in 3.6 again.
+&quot;TWCR = (1&lt;&lt;TWEN) | (1&lt;&lt;TWSTA) | (1&lt;&lt;TWINT)&quot;
+Wait, looking at the image, the first part is &quot;TWCR = (1&lt;&lt;TWEN)&quot;. Then there is a vertical bar. Then &quot;(1&lt;&lt;TWSTA)&quot;. Then a vertical bar. Then &quot;(1&lt;&lt;TWINT)&quot;.
+Wait, is it `|` or `</pre></div>
+
+<div class="mt-12 text-center text-xs text-slate-600"><a href="../index.html" class="hover:text-slate-400">Benchmark OCR 2026</a></div>
+</div></body></html>

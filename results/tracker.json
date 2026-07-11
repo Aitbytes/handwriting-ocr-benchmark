@@ -1,0 +1,12 @@
+{
+  "protocole_i2c": {
+    "fingerprint": "0abfda2ba226d9f395a740928155a7723ba089cd300e8aebbba3333d250071eb",
+    "models_fp": "b6777a755688",
+    "processed_at": "2026-07-11T01:00:00"
+  },
+  "examen_bts": {
+    "fingerprint": "0abfda2ba226d9f395a740928155a7723ba089cd300e8aebbba3333d250071eb",
+    "models_fp": "b6777a755688",
+    "processed_at": "2026-07-11T01:00:00"
+  }
+}
