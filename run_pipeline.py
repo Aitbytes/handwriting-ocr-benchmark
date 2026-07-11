@@ -21,6 +21,49 @@ TRANSCRIPTIONS_DIR = RESULTS_DIR / "transcriptions"
 
 PROMPT = """Transcribe all handwritten text in this image verbatim. Include all text, numbers, code, punctuation, and special characters exactly as written. Preserve line breaks and formatting. For any text you cannot read confidently, mark it as [?]. Output ONLY the transcribed text, nothing else."""
 
+# ── AI Analysis prompt template ──
+PROMPT_TEMPLATE = """Tu es un analyste expert en OCR et IA. Analyse ces résultats de benchmark d'écriture manuscrite et produis TROIS sections HTML détaillées en français. Chaque carte doit faire 3-5 phrases riches en données, pas juste un titre.
+
+## Section 1 : Surprises & Découvertes (id="slide-ai-findings")
+4 cartes (grid-cols-2). Chaque carte doit citer des chiffres précis et expliquer POURQUOI c'est surprenant.
+
+EXEMPLE de carte bien rédigée :
+<div class="bg-slate-900/70 border border-red-500/20 rounded-2xl p-5">
+  <div class="flex items-center gap-2 mb-2"><span class="text-xl">\u274c</span><h3 class="font-bold text-red-400">GPT-5 Bloqué par le Filtre de Contenu</h3></div>
+  <p class="text-sm text-slate-300">GPT-5 a totalement refusé de transcrire le document I2C — réponse vide. Le modèle a probablement interprété le code C et les schémas techniques comme du contenu sensible, déclenchant le filtre de sécurité d'OpenAI. C'est un échec critique pour un usage académique ou ingénierie.</p>
+</div>
+
+## Section 2 : Recommandations (id="slide-ai-recommendations")
+4 cartes (grid-cols-2) couvrant : précision maximale, meilleur rapport qualité/prix, pipeline de production, choix équilibré. Nommer les modèles, leurs métriques et le scénario d'usage.
+
+EXEMPLE de carte bien rédigée :
+<div class="bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/20 rounded-2xl p-5">
+  <div class="text-xs text-green-400 uppercase tracking-wider mb-2">Meilleur Rapport Qualité/Prix</div>
+  <h3 class="text-lg font-bold mb-2">Qwen3.5 122B + Gemma 4 31B</h3>
+  <p class="text-sm text-slate-400">Ces deux modèles sont GRATUITS via HuggingFace Router. Qwen3.5 122B excelle sur les documents structurés (9,5/10 sur le formulaire BTS), tandis que Gemma 4 31B est le plus rapide (3,1s en moyenne). Pour 0$, vous couvrez 90% des cas d'usage.</p>
+</div>
+
+## Section 3 : Modèles Non Testés (id="slide-ai-untested")
+Liste TOUS les modèles du benchmark AIMultiple non testés, avec pour chacun : pourquoi pas testé, comment le tester concrètement.
+
+EXEMPLE d'élément bien rédigé :
+<div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 flex gap-4">
+  <div class="flex-shrink-0 w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-2xl">\U0001f52c</div>
+  <div class="flex-1">
+    <div class="flex items-center gap-2 mb-1"><h3 class="font-bold">olmOCR-2-7B-1025-FP8</h3><span class="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded">Top 4 du benchmark AIMultiple</span></div>
+    <p class="text-sm text-slate-400">Modèle OCR spécialisé d'Allen AI. Non disponible via API serverless — nécessite un HF Inference Endpoint (environ 1-3$/h de GPU) ou une installation locale avec conda + Python 3.11 + vLLM. Alternative : utiliser le playground gratuit sur olmocr.allenai.org.</p>
+  </div>
+</div>
+
+FORMAT IMPÉRATIF — chaque section doit suivre EXACTEMENT ce squelette :
+
+<div id="slide-ai-findings" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">Surprises et Découvertes</h2><div class="grid grid-cols-2 gap-6">...4 CARTES DÉTAILLÉES...</div></div></div>
+<div id="slide-ai-recommendations" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">Recommandations</h2><div class="grid grid-cols-2 gap-6">...4 CARTES DÉTAILLÉES...</div></div></div>
+<div id="slide-ai-untested" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-3">Modèles Non Testés</h2><p class="text-slate-400 mb-8">Ces modèles du benchmark AIMultiple nécessitent des APIs ou infrastructures dédiées</p><div class="space-y-4">...UN ÉLÉMENT PAR MODÈLE...</div></div></div>
+
+RÉSULTATS DU BENCHMARK :
+{summary}"""
+
 # ── Models to benchmark ──
 BENCHMARK_MODELS = [
     # Direct AIMultiple matches (OpenRouter)
@@ -391,32 +434,20 @@ def generate_ai_analysis(data):
 
     summary = "\n".join(summary_lines)
 
-    prompt = f"""Analyse ce benchmark OCR et produis TROIS sections HTML en français. SOIS CONCIS.
-
-Section 1 (id="slide-ai-findings"): 4 cartes (grid-cols-2) — faits marquants, surprises, échecs.
-Section 2 (id="slide-ai-recommendations"): 4 cartes (grid-cols-2) — précision max, budget, pipeline, équilibré.
-Section 3 (id="slide-ai-untested"): liste des modèles non testés avec raison.
-
-Style: Tailwind dark (bg-slate-900/70 border-slate-800 rounded-2xl p-5). Format EXACT impératif:
-
-<div id="slide-ai-findings" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">Surprises &amp; Découvertes</h2><div class="grid grid-cols-2 gap-6">...4 cartes max 2 lignes...</div></div></div>
-<div id="slide-ai-recommendations" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-8">Recommandations</h2><div class="grid grid-cols-2 gap-6">...4 cartes...</div></div></div>
-<div id="slide-ai-untested" class="slide px-8 py-24 border-t border-slate-800"><div class="max-w-5xl mx-auto"><h2 class="text-4xl font-bold mb-3">Modèles Non Testés</h2><p class="text-slate-400 mb-8">Modèles nécessitant des APIs dédiées</p><div class="space-y-4">...1 élément par modèle...</div></div></div>
-
-RÉSULTATS:
-{summary}"""
+    prompt = PROMPT_TEMPLATE.format(summary=summary)
 
     payload = json.dumps({
-        "model": "deepseek/deepseek-chat",
+        "model": "deepseek/deepseek-v4-flash",
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 8000,
+        "max_tokens": 12000,
         "temperature": 0.7,
     })
 
     tmpfile = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
     tmpfile.write(payload); tmpfile.close()
 
-    print("🤖 Génération de l'analyse par DeepSeek (V3)...")
+    print("🤖 Génération de l'analyse par DeepSeek V4 Flash...")
+    start = time.time()
     try:
         r = subprocess.run([
             'curl', '-s', '--cacert', CERT_BUNDLE,
@@ -424,8 +455,9 @@ RÉSULTATS:
             '-H', f'Authorization: Bearer {api_key}',
             '-H', 'Content-Type: application/json',
             '-H', 'HTTP-Referer: https://github.com/Aitbytes/handwriting-ocr-benchmark',
-            '-d', f'@{tmpfile.name}', '--max-time', '300'
-        ], capture_output=True, text=True, timeout=120)
+            '-d', f'@{tmpfile.name}', '--max-time', '600'
+        ], capture_output=True, text=True, timeout=300)
+        elapsed = time.time() - start
         os.unlink(tmpfile.name)
 
         resp = json.loads(r.stdout)
